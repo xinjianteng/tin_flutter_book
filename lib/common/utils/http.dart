@@ -32,24 +32,21 @@ class HttpUtil {
     // BaseOptions、Options、RequestOptions 都可以配置参数，优先级别依次递增，且可以根据优先级别覆盖参数
     BaseOptions options = BaseOptions(
       // 请求基地址,可以包含子路径
-      baseUrl: CSG_API_HOST,
-
+      baseUrl: csgHost,
       // baseUrl: storage.read(key: STORAGE_KEY_APIURL) ?? SERVICE_API_BASEURL,
       //连接服务器超时时间，单位是毫秒.
       connectTimeout: Duration(milliseconds: 10000),
-
       // 响应流上前后两次接受到数据的间隔，单位为毫秒。
       receiveTimeout: Duration(milliseconds: 5000),
-
       // Http请求头.
-      headers: {},
+      headers: {
 
+      },
       /// 请求的Content-Type，默认值是"application/json; charset=utf-8".
       /// 如果您想以"application/x-www-form-urlencoded"格式编码请求数据,
       /// 可以设置此选项为 `Headers.formUrlEncodedContentType`,  这样[Dio]
       /// 就会自动编码请求体.
-      // contentType: 'application/json; charset=utf-8',
-      contentType: 'Headers.formUrlEncodedContentType',
+      contentType: Headers.formUrlEncodedContentType,
 
       /// [responseType] 表示期望以那种格式(方式)接受响应数据。
       /// 目前 [ResponseType] 接受三种类型 `JSON`, `STREAM`, `PLAIN`.
@@ -71,7 +68,7 @@ class HttpUtil {
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
         // Do something before request is sent
-        if (options.baseUrl == CSG_API_HOST) {
+        if (options.baseUrl == csgHost) {
           options.headers.addAll(getOtherHeader());
         }
 
@@ -113,7 +110,7 @@ class HttpUtil {
     log('error.code -> ${eInfo.code}, error.message -> ${eInfo.message}');
     switch (eInfo.code) {
       case 401:
-        UserStore.to.onLogout();
+        // UserStore.to.onLogout();
         EasyLoading.showError(eInfo.message);
         break;
       default:
@@ -197,9 +194,10 @@ class HttpUtil {
   Map<String, dynamic>? getAuthorizationHeader() {
     var headers = <String, dynamic>{};
     if (Get.isRegistered<UserStore>() && UserStore.to.hasToken == true) {
-      headers['Authorization'] = 'Basic ${UserStore.to.tokenCsg}';
+      headers['Authorization'] = 'Bearer ${UserStore.to.token}';
+      headers['LoginRequired'] = 'necessary';
     } else {
-      headers['Authorization'] = 'Basic cGM6cGM=';
+      headers['Authorization'] = 'Basic YXBwOmFwcA==';
     }
     return headers;
   }
@@ -208,13 +206,14 @@ class HttpUtil {
   Map<String, dynamic> getOtherHeader() {
     var headers = <String, dynamic>{};
     headers['deviceId'] = '2e33f78a-e0fb-4cd2-8193-f2efb7e8b3b0';
-    headers['appVersion'] = '514337';
-    headers['appVersionNo'] = '8.5.0';
+    headers['appVersion'] = '8.5.0';
+    headers['appVersionNo'] = '514337';
     headers['deviceModel'] = '2107119DC';
     headers['deviceFactory'] = 'Xiaomi';
     headers['osType'] = '1';
     headers['osVersion'] = '33';
-    headers['netType'] = '6';
+    headers['netType'] = '1';
+    headers['channel'] = '1';
     return headers;
   }
 
@@ -279,6 +278,7 @@ class HttpUtil {
     if (authorization != null) {
       requestOptions.headers!.addAll(authorization);
     }
+    requestOptions.headers!.addAll(getOtherHeader());
 
     if (baseUrl.isNotEmpty) {
       dio.options.baseUrl = baseUrl;

@@ -21,6 +21,16 @@ const String CT_APIKEY="DjiK8nLaUktTUdZXapGx1Z9q";
 
 const String DBVERSION_KEY= "db_version_key";
 
+// const String csgHost="http://pc-test.zglibrary.com/api";
+const String csgSecret_key="secret_key=4CTZ7892m8xOba48efnN4PBgqXKEKU5J";
+const String csgHost="http://api.zglibrary.com";
 
-// const String CSG_HOST="http://api.zglibrary.com";
-const String CSG_API_HOST="http://test.zglibrary.com";
+///登录
+const String csgApiLogin="/auth/oauth/token";
+///上传书列表
+const String csgUploadBookInfo="/book/uploadBookInfo/books";
+const String csgTest="/adv/info/all";
+const String uploadBookGroup="/book/uploadBookGroup/books";
+
+const String authorization="Basic YXBwOmFwcA==";
+

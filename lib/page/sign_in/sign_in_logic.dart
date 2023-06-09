@@ -29,12 +29,12 @@ class SignInLogic extends GetxController {
 
 
     UserCsgLoginRequestEntity csgParams = UserCsgLoginRequestEntity(
-        username: "APP@+86 15805930942",
+        username: "APP@+86 19959271454",
         password: EncryptAesUtils.encryptAES("a123456", "gbcloudgbcloudgb", "gbcloudgbcloudgb"));
 
     UserCsgLoginResponseEntity csgUser=await CsgAPI.login(params: csgParams);
-
-
+    UserStore.to.saveProfile(csgUser);
+    Get.offAndToNamed(AppRoutes.INITIAL);
 
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../common/api/books_api.dart';
+import '../../common/api/apis.dart';
 import '../../common/entity/page.dart';
 import 'main_state.dart';
 
@@ -16,7 +16,6 @@ class MainLogic extends GetxController {
 
   late ScrollController scrollController;
 
-  // final WidgetRepository repository = WidgetDbRepository();
 
   @override
   void onInit() {
@@ -38,9 +37,9 @@ class MainLogic extends GetxController {
   /// 响应式成员变量
   /// 成员变量
   String categoryCode = '';
-  int curPage = 0;
-  int pageSize = 20;
-  int total = 20;
+  int curPage = 1;
+  int pageSize = 30;
+  int total = 30;
 
 
 
@@ -70,21 +69,18 @@ class MainLogic extends GetxController {
 
   // 拉取数据
   Future<void> fetchNewsList({bool isRefresh = false}) async {
-    var response =await BooksAPI.bookPageList(
+    var response =await CsgAPI.getBooks(
       params: PageListRequestEntity(
-          limit: pageSize.toString(),
-          skip: curPage.toString(),
-          count: '1',
-          order: "updatedAt"
+          size: pageSize.toString(),
+          current: curPage.toString(),
       ),
-      cacheDisk: true,
     );
     if (isRefresh == true) {
-      total = response.count;
+      // total = response.count;
       state.newsList.clear();
     }
     curPage++;
-    state.newsList.addAll(response.results!);
+    // state.newsList.addAll(response.results!);
     update();
   }
 

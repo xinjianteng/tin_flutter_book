@@ -2,7 +2,6 @@
 import 'package:dio/dio.dart';
 
 import '../entity/entities.dart';
-import '../utils/dio_util.dart';
 import '../utils/utils.dart';
 import '../values/values.dart';
 
@@ -13,14 +12,11 @@ class UserAPI {
   static Future<UserLoginResponseEntity> login({
     UserLoginRequestEntity? params,
   }) async {
-    // var response = await HttpUtil().get(
-    //   '/1/login',
-    //   queryParameters: params?.toJson(),
-    //   baseUrl: BMOB_API_HOST,
-    // );
-
-
-    var response =DioUtil().request( '/1/login',method: DioMethod.get,params: params!.toJson());
+    var response = await HttpUtil().get(
+      '/1/login',
+      queryParameters: params?.toJson(),
+      baseUrl: BMOB_API_HOST,
+    );
 
     return UserLoginResponseEntity.fromJson(response as Map<String, dynamic>);
   }
@@ -41,18 +37,6 @@ class UserAPI {
     return UserRegisterRequestEntity.fromJson(response as Map<String, dynamic>);
   }
 
-  /// Profile
-  static Future<UserLoginResponseEntity> profile() async {
-    var response = await HttpUtil().post(
-      '/user/profile',
-    );
-    return UserLoginResponseEntity.fromJson(response);
-  }
 
-  /// Logout
-  static Future logout() async {
-    return await HttpUtil().post(
-      '/user/logout',
-    );
-  }
+
 }

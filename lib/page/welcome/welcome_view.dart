@@ -9,6 +9,6 @@ class WelcomePage extends StatelessWidget {
     final logic = Get.put(WelcomeLogic());
     final state = Get.find<WelcomeLogic>().state;
 
-    return Container();
+    return Container(child: Text("欢迎界面"),);
   }
 }

@@ -44,6 +44,15 @@ class ApplicationPage extends StatelessWidget {
               color: AppColors.primaryText,
             ),
             onPressed: () {},
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.refresh,
+              color: AppColors.primaryText,
+            ),
+            onPressed: () {
+
+            },
           )
         ]);
   }
