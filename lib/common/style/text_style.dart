@@ -31,6 +31,14 @@ class TextStyleUnit {
       // fontWeight: FontWeight.bold,
     );
   }
+  /// 不传值 代表获取当前时间戳
+  static TextStyle bookNameStyle() {
+    return TextStyle(
+      color: AppColors.bookName,
+      fontSize: 22.sp,
+      // fontWeight: FontWeight.bold,
+    );
+  }
 
 
 ///——————————————————————————————————————————————///

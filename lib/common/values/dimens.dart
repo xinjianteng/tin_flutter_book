@@ -16,6 +16,7 @@ class Dimens {
   // static const double elevation = 1.0;
 
   static  double margin = 12.0.w;
+  static  double space = 5.0.w;
   static const double btnRadius = 5.0;
   static const double bookCoverRadius = 5.0;
   static  double btnHeight = 45.h;

@@ -29,31 +29,31 @@ class BookPageListResponseEntity {
 class UploadBook {
   String? bookId;
   String? bookName;
+  String? bookAuthor;
   List? bookCovers;
 
   UploadBook({
     Key? key,
     this.bookId,
     this.bookName,
+    this.bookAuthor,
     this.bookCovers,
   });
 
   Map<String, dynamic> toJson() => {
         "bookId": bookId,
         "bookName": bookName,
+        "bookAuthor": bookAuthor,
         "cover": bookCovers,
       };
 
   factory UploadBook.fromJson(Map<String, dynamic> json) => UploadBook(
         bookId: json["bookId"],
         bookName: json["bookName"],
+        bookAuthor: json["bookAuthor"],
         bookCovers: json["bookCovers"],
       );
-
 }
-
-
-
 
 class DownloadBookResponseEntity<T> {
   String? msg;
@@ -80,14 +80,13 @@ class DownloadBookResponseEntity<T> {
       );
 
   Map<String, dynamic> toJson() => {
-    "msg": msg,
-    "code": code,
-    "sign": sign,
-    "nonce": nonce,
-    "data": data,
-  };
+        "msg": msg,
+        "code": code,
+        "sign": sign,
+        "nonce": nonce,
+        "data": data,
+      };
 }
-
 
 class DownloadBook {
   String? bookId;
@@ -101,46 +100,42 @@ class DownloadBook {
   String? bookAuthor;
   int? fileFormat;
 
-
-  DownloadBook({
-    Key? key,
-    this.bookId,
-    this.bookName,
-    this.bookCover,
-    this.encryptFilePath,
-    this.filePath,
-    this.downloadUrl,
-    this.rawDownloadUrl,
-    this.isUpload,
-    this.bookAuthor,
-    this.fileFormat
-  });
-
+  DownloadBook(
+      {Key? key,
+      this.bookId,
+      this.bookName,
+      this.bookCover,
+      this.encryptFilePath,
+      this.filePath,
+      this.downloadUrl,
+      this.rawDownloadUrl,
+      this.isUpload,
+      this.bookAuthor,
+      this.fileFormat});
 
   Map<String, dynamic> toJson() => {
-    "bookId": bookId,
-    "bookName": bookName,
-    "bookCover": bookCover,
-    "encryptFilePath": encryptFilePath,
-    "filePath": filePath,
-    "downloadUrl": downloadUrl,
-    "rawDownloadUrl": rawDownloadUrl,
-    "isUpload": isUpload,
-    "bookAuthor": bookAuthor,
-    "fileFormat": fileFormat,
-  };
+        "bookId": bookId,
+        "bookName": bookName,
+        "bookCover": bookCover,
+        "encryptFilePath": encryptFilePath,
+        "filePath": filePath,
+        "downloadUrl": downloadUrl,
+        "rawDownloadUrl": rawDownloadUrl,
+        "isUpload": isUpload,
+        "bookAuthor": bookAuthor,
+        "fileFormat": fileFormat,
+      };
 
   factory DownloadBook.fromJson(Map<String, dynamic> json) => DownloadBook(
-    bookId: json["bookId"],
-    bookName: json["bookName"],
-    bookCover: json["bookCover"],
-    encryptFilePath: json["encryptFilePath"],
-    filePath: json["filePath"],
-    downloadUrl: json["downloadUrl"],
-    rawDownloadUrl: json["rawDownloadUrl"],
-    isUpload: json["isUpload"],
-    bookAuthor: json["bookAuthor"],
-    fileFormat: json["fileFormat"],
-  );
-
+        bookId: json["bookId"],
+        bookName: json["bookName"],
+        bookCover: json["bookCover"],
+        encryptFilePath: json["encryptFilePath"],
+        filePath: json["filePath"],
+        downloadUrl: json["downloadUrl"],
+        rawDownloadUrl: json["rawDownloadUrl"],
+        isUpload: json["isUpload"],
+        bookAuthor: json["bookAuthor"],
+        fileFormat: json["fileFormat"],
+      );
 }

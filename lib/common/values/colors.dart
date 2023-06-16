@@ -13,6 +13,7 @@ class AppColors {
 
   /// 边框颜色
   static const Color inputColor = Color(0xFFF2F3F4);
+  static const Color bookName = Color(0xFF09172F);
 
 
 

@@ -170,13 +170,29 @@ class _MainPageState extends State<MainPage> {
             Positioned(
               top: 0,
               child: DecoratedBox(
-                decoration:  DecorationStyle.bookDecoration(),
+                decoration: DecorationStyle.bookDecoration(),
                 child: netImageCached(
                   book.bookCovers![0].toString(),
                   borderRadius: Borders.bookCoverRadius,
                   width: 125.w,
                   height: 175.h,
                 ),
+              ),
+            ),
+            Positioned(
+              top: Dimens.margin,
+              left: 125.w+Dimens.space,
+              child: Text(
+                book.bookName.toString(),
+                style: TextStyleUnit.bookNameStyle(),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 125.w+Dimens.space,
+              child: Text(
+                book.bookAuthor.toString(),
+                style: TextStyleUnit.bookNameStyle(),
               ),
             ),
           ],
