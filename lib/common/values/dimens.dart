@@ -13,9 +13,15 @@ class Dimens {
   static const double menuImgSize = 20.0;
 
   static const double menuBigSize = 144.0;
-  static const double elevation = 10.0;
+  // static const double elevation = 1.0;
 
-  static const double margin = 12.0;
+  static  double margin = 12.0.w;
+  static const double btnRadius = 5.0;
+  static const double bookCoverRadius = 5.0;
+  static  double btnHeight = 45.h;
+
+  static  double bookWidth = 125;
+
 
   static double getStatusBarHeight() {
     return ScreenUtil().statusBarHeight;
@@ -24,7 +30,7 @@ class Dimens {
   // static double getHeight(num value) {
   //   return value.h;
   // }
-
+  //
   // static double getSHeight() {
   //   return ScreenUtil().screenHeight;
   // }
@@ -36,16 +42,16 @@ class Dimens {
   // static double getSWidth() {
   //   return ScreenUtil().screenWidth;
   // }
-
+  //
   // static Size getSize() {
   //   return  Size(Dimens.getSWidth(), Dimens.getSHeight());
   // }
-
+  //
   // static double getSp(num value) {
   //   return ScreenUtil().setSp(value);
   // }
-  //
-  //
+
+
 
 
 }

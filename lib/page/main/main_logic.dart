@@ -1,8 +1,14 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:tin_flutter_book/common/utils/utils.dart';
 
 import '../../common/api/apis.dart';
+import '../../common/entity/entities.dart';
 import '../../common/entity/page.dart';
 import 'main_state.dart';
 
@@ -17,12 +23,23 @@ class MainLogic extends GetxController {
   late ScrollController scrollController;
 
 
+
+
   @override
   void onInit() {
     // TODO: implement onInit
     scrollController = ScrollController(keepScrollOffset: true);
 
     super.onInit();
+  }
+
+  void switchViewStyle(){
+    if(state.viewStyle.value==1){
+      state.viewStyle.value==2;
+    }else{
+      state.viewStyle.value==1;
+    }
+    onRefresh();
   }
 
 
@@ -44,7 +61,7 @@ class MainLogic extends GetxController {
 
 
   /// 事件
-  void onRefresh() {
+  void onRefresh() async{
     curPage = 1;
     fetchNewsList(isRefresh: true).then((_) {
       refreshController.refreshCompleted();
@@ -53,7 +70,7 @@ class MainLogic extends GetxController {
     });
   }
 
-  void onLoading() {
+  void onLoading() async{
     if (state.newsList.length < total) {
       fetchNewsList().then((_) {
         refreshController.loadComplete();
@@ -76,14 +93,79 @@ class MainLogic extends GetxController {
       ),
     );
     if (isRefresh == true) {
-      // total = response.count;
+      total = response.data!.total;
       state.newsList.clear();
     }
     curPage++;
-    // state.newsList.addAll(response.results!);
+    state.newsList.addAll(response.data!.records);
     update();
   }
 
+
+  Future<void>  getDownloadBookInfo(UploadBook uploadBook) async{
+    var response =await CsgAPI.downloadBook(
+      params: uploadBook
+    );
+
+    writeString("ssss");
+
+    HttpUtil().downloadFile(response.data!.downloadUrl, "E:\\");
+
+    log(response.toString());
+  }
+
+
+  /// 获取文档目录文件
+  Future<File> _getLocalDocumentFile() async {
+    final dir = await getApplicationDocumentsDirectory();
+    return File('${dir.path}/str.txt');
+  }
+
+  /// 获取临时目录文件
+  Future<File> _getLocalTemporaryFile() async {
+    final dir = await getTemporaryDirectory();
+    return File('${dir.path}/str.txt');
+  }
+
+  /// 获取应用程序目录文件
+  Future<File> _getLocalSupportFile() async {
+    final dir = await getApplicationSupportDirectory();
+    return File('${dir.path}/str.txt');
+  }
+
+  /// 读取值
+  Future<void> readString() async {
+    try {
+
+      final file = await _getLocalDocumentFile();
+      final result  = await file.readAsString();
+      print("result-----$result");
+
+      final file1 = await _getLocalTemporaryFile();
+      final result1  = await file1.readAsString();
+      print("result1-----$result1");
+
+      final file2 = await _getLocalSupportFile();
+      final result2  = await file2.readAsString();
+      print("result2-----$result2");
+
+
+    } catch (e) {
+    }
+  }
+
+  /// 写入数据
+  Future<void> writeString(String str) async {
+    final file = await _getLocalDocumentFile();
+    await file.writeAsString(str);
+
+    final file1 = await _getLocalTemporaryFile();
+    await file1.writeAsString(str);
+
+    final file2 = await _getLocalSupportFile();
+    await file2.writeAsString(str);
+    print("写入成功");
+  }
 
 
 }

@@ -49,37 +49,63 @@ class CsgAPI {
 
 
 
+
+
   /// 登录
-  static Future<UserCsgLoginResponseEntity> getBooks({
+  static Future<PageListResponseEntity> getBooks({
     PageListRequestEntity? params,
   }) async {
-    // var timeStamp = AppUtils.getTime();
-    // var nonce = AppUtils.getNonce();
-    // Map<String, String> formData = {};
-    // formData["current"] = 1.toString();
-    // formData["size"] = 20.toString();
-    // formData["from"] = "APP";
-    // // formData["sort"] = 1.toString();
-    // formData["groupId"] = "3501598861";
-    // formData["nonce"] = nonce;
-    // formData["timestamp"] = timeStamp.toString();
-    // var signStr = "";
-    // for (var key in formData.keys) {
-    //   var value = formData[key];
-    //   signStr = "${"$signStr$key=" + value!}&";
-    // }
-    // signStr = "${signStr}secret_key=4CTZ7892m8xOba48efnN4PBgqXKEKU5J";
-    // formData["sign"] = EncryptUtils.encryptMd5(signStr).toUpperCase();
-
-
     var timeStamp = AppUtils.getTime();
     var nonce = AppUtils.getNonce();
     Map<String, String> formData = {};
-    formData["groupId"] = "3501598861";
-    formData["size"] = "100";
-
+    formData["current"] = params!.current.toString();
+    formData["from"] = 'APP';
     formData["nonce"] = nonce;
     formData["timestamp"] = timeStamp.toString();
+    // formData["size"] = params!.size.toString();
+    // formData["isGroup"] = '0';
+    // formData["sort"] = '2';
+
+    var signStr = "";
+    for (var key in formData.keys) {
+      var value = formData[key];
+      signStr="$signStr$key=$value&";
+    }
+    signStr = "${signStr}secret_key=4CTZ7892m8xOba48efnN4PBgqXKEKU5J";
+    formData["sign"] = EncryptUtils.encryptMd5(signStr).toUpperCase();
+
+    var response = await HttpUtil().post(
+      csgUploadBookInfo,
+      data: formData,
+      queryParameters: formData,
+      baseUrl: csgHost,
+    );
+
+    return PageListResponseEntity.fromJson(
+        response as Map<String, dynamic>);
+
+  }
+
+
+
+
+  /// 登录
+  static Future<DownloadBookResponseEntity> downloadBook({
+    UploadBook? params,
+  }) async {
+    var timeStamp = AppUtils.getTime();
+    var nonce = AppUtils.getNonce();
+    Map<String, String> formData = {};
+
+    // formData['deviceModel'] = '2107119DC';
+    // formData['deviceFactory'] = 'Xiaomi';
+    // formData['osType'] = '1';
+    // formData['deviceId'] = '2e33f78a-e0fb-4cd2-8193-f2efb7e8b3b0';
+    formData['bookId'] = params!.bookId.toString();
+    // formData["scope"] = "app";
+    formData["nonce"] = nonce;
+    formData["timestamp"] = timeStamp.toString();
+
     var signStr = "";
     for (var key in formData.keys) {
       var value = formData[key];
@@ -87,21 +113,17 @@ class CsgAPI {
     }
     signStr = "${signStr}secret_key=4CTZ7892m8xOba48efnN4PBgqXKEKU5J";
     formData["sign"] = EncryptUtils.encryptMd5(signStr).toUpperCase();
-
     var response = await HttpUtil().post(
-      uploadBookGroup,
+      csgDownloadBook,
       data: formData,
       baseUrl: csgHost,
     );
 
-
-    return UserCsgLoginResponseEntity.fromJson(
+    return DownloadBookResponseEntity.fromJson(
         response as Map<String, dynamic>);
-
-
-
-
   }
+
+
 
 
 }

@@ -3,6 +3,19 @@ import 'package:flutter/material.dart';
 
 class AppColors {
 
+  /// 主控件-背景 蓝色
+  static const Color primaryButton = Color(0xFF4B9CFF);
+  /// 主文本 灰色
+  static const Color primaryText = Color(0xff333333);
+
+  /// nav 默认颜色 灰色
+  static const Color divider =  Color(0xffdddddd);
+
+  /// 边框颜色
+  static const Color inputColor = Color(0xFFF2F3F4);
+
+
+
   static const Color primary = Color(0xFF23B38E);
   static const Color secondary = Color(0xFF51DEC6);
   static const Color red = Color(0xFFFF2B45);
@@ -21,10 +34,6 @@ class AppColors {
 
   /// 主背景 白色
   static const Color primaryBackground = Color(0xffffffff);
-  /// 主控件-背景 蓝色
-  static const Color primaryButton =blue;
-  /// 主文本 灰色
-  static const Color primaryText = Color(0xff232323);
 
   /// 次背景 白色
   static const Color secondBackground = Color(0xffF6FBF4);
@@ -37,8 +46,7 @@ class AppColors {
   /// nav 默认颜色 灰色
   static const Color navNormal =  Color(0xff959595);
 
-  /// nav 默认颜色 灰色
-  static const Color divider =  Color(0xff959595);
+
 
 
 
@@ -56,8 +64,6 @@ class AppColors {
   /// 警告颜色
   static const Color warnColor = Color(0xFFFFB822);
 
-  /// 边框颜色
-  static const Color borderColor = Color(0xFFDEE3FF);
 
   static const Color pinkColor = Color(0xFFF77866);
 

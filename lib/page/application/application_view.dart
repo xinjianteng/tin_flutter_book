@@ -15,47 +15,12 @@ class ApplicationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      appBar: _buildAppBar(),
       body: _buildPageView(),
       bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 
-
-
-  // 顶部导航
-  AppBar _buildAppBar() {
-    return transparentAppBar(
-        title: Obx(() => Text(
-          logic.state.tabTitles[state.page],
-          style: TextStyle(
-            color: AppColors.primaryText,
-            fontFamily: 'Montserrat',
-            fontSize: 18.sp,
-            fontWeight: FontWeight.w600,
-          ),
-        )),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.search,
-              color: AppColors.primaryText,
-            ),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.refresh,
-              color: AppColors.primaryText,
-            ),
-            onPressed: () {
-
-            },
-          )
-        ]);
-  }
 
   // 内容页
   Widget _buildPageView() {

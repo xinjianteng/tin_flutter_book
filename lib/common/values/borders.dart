@@ -8,6 +8,10 @@ class Borders {
   );
 
 
+  static const BorderRadiusGeometry bookCoverRadius =
+  BorderRadius.all(Radius.circular(15));
+
+
   static const BorderRadiusGeometry k0pxRadius =
   BorderRadius.all(Radius.circular(0));
 

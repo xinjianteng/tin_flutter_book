@@ -5,16 +5,40 @@ import '../values/values.dart';
 
 ///文本样式
 class TextStyleUnit {
-  // 标题加黑
-  static TextStyle navSelect = TextStyle(
-    fontWeight: FontWeight.bold,
+  // 全局 appbar标题
+  static TextStyle appbar = TextStyle(
+    fontWeight: FontWeight.normal,
+    fontSize: 34.sp,
+  );
+
+  // 编辑框
+  static TextStyle input = TextStyle(
+    color: AppColors.primaryText,
     fontSize: 16.sp,
   );
 
-  // 标题加黑
-  static TextStyle navNormal = TextStyle(
-    fontWeight: FontWeight.normal,
+  // 编辑框 提示语
+  static TextStyle hint = TextStyle(
+    color: AppColors.primaryText,
     fontSize: 16.sp,
+  );
+
+  /// 不传值 代表获取当前时间戳
+  static TextStyle btnTextStyle() {
+    return TextStyle(
+      color: AppColors.white,
+      fontSize: 24.sp,
+      // fontWeight: FontWeight.bold,
+    );
+  }
+
+
+///——————————————————————————————————————————————///
+
+  // 标题加黑
+  TextStyle navSelect = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 34.sp,
   );
 
   // 标题加黑
@@ -68,21 +92,17 @@ class TextStyleUnit {
   );
 
   //  分类简介
-  static  TextStyle categoryInfo = TextStyle(
+  static TextStyle categoryInfo = TextStyle(
     fontSize: 16.sp,
     fontWeight: FontWeight.bold,
     color: AppColors.primaryText,
   );
-
 
   //  分类简介
   static TextStyle emptyTip = TextStyle(
     fontSize: 22.sp,
     color: AppColors.blue,
   );
-
-
-
 
   static TextStyle commonChip = TextStyle(
     fontSize: 12.sp,
@@ -107,5 +127,4 @@ class TextStyleUnit {
     decoration: TextDecoration.lineThrough,
     decorationThickness: 2,
   );
-
 }

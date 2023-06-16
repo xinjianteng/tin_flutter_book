@@ -14,7 +14,7 @@ class RegisterPage extends StatelessWidget {
     final state = Get.find<RegisterLogic>().state;
 
     return Scaffold(
-      appBar: transparentAppBar(title:const Text("注册"),leading: const BackButton()),
+      appBar: transparentAppBar(title:"注册",leading: const BackButton()),
       backgroundColor: Colors.white,
       body: buildBody(logic),
     );
@@ -62,7 +62,7 @@ class RegisterPage extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
-        color: AppColors.borderColor,
+        color: AppColors.inputColor,
         borderRadius: BorderRadius.circular(5),
       ),
       child: TextField(
@@ -84,7 +84,7 @@ class RegisterPage extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
-        color: AppColors.borderColor,
+        color: AppColors.inputColor,
         borderRadius: BorderRadius.circular(5),
       ),
       child: TextField(

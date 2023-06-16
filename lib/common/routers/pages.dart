@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:tin_flutter_book/page/application/application_view.dart';
+import 'package:tin_flutter_book/page/main/main_view.dart';
 import 'package:tin_flutter_book/page/register/register_view.dart';
 
 import '../../page/sign_in/sign_in_view.dart';
@@ -45,6 +46,15 @@ class AppPages {
         RouteAuthMiddleware(priority: 1),
       ],
     ),
+
+    GetPage(
+      name: AppRoutes.main,
+      page: () => MainPage(),
+      middlewares: [
+        RouteAuthMiddleware(priority: 1),
+      ],
+    ),
+
 
   ];
 

@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tin_flutter_book/common/style/style.dart';
 
 import '../values/values.dart';
 
-
-
-/// 透明背景 AppBar
+/// 通用 AppBar
 AppBar transparentAppBar({
-  Widget? title,
+  String? title,
   Widget? leading,
   List<Widget>? actions,
 }) {
   return AppBar(
     backgroundColor: Colors.transparent,
-    elevation: 0,
-    title: title != null
-        ? Center(
-      child: title,
-    )
-        : null,
+    title: Text(
+      title!,
+      style: TextStyleUnit.appbar,
+    ),
     leading: leading,
     actions: actions,
   );

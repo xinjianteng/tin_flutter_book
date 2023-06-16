@@ -11,6 +11,8 @@ import 'package:tin_flutter_book/common/widgets/widgets.dart';
 
 import '../store/stores.dart';
 
+import 'package:path/path.dart' as p;
+
 /*
   * http 操作类
   *
@@ -39,9 +41,8 @@ class HttpUtil {
       // 响应流上前后两次接受到数据的间隔，单位为毫秒。
       receiveTimeout: Duration(milliseconds: 5000),
       // Http请求头.
-      headers: {
+      headers: {},
 
-      },
       /// 请求的Content-Type，默认值是"application/json; charset=utf-8".
       /// 如果您想以"application/x-www-form-urlencoded"格式编码请求数据,
       /// 可以设置此选项为 `Headers.formUrlEncodedContentType`,  这样[Dio]
@@ -284,7 +285,6 @@ class HttpUtil {
       dio.options.baseUrl = baseUrl;
     }
 
-
     var response = await dio.post(
       path,
       data: data,
@@ -292,6 +292,66 @@ class HttpUtil {
       options: requestOptions,
       cancelToken: cancelToken,
     );
+    return response.data;
+  }
+
+  // /// restful download 操作
+  // Future download(String urlPath, {
+  //   String baseUrl = '',
+  //   dynamic data,
+  //   Map<String, dynamic>? queryParameters,
+  //   Options? options,
+  // }) async {
+  //   Options requestOptions = options ?? Options();
+  //
+  //   requestOptions.headers = requestOptions.headers ?? {};
+  //   Map<String, dynamic>? authorization = getAuthorizationHeader();
+  //   if (authorization != null) {
+  //     requestOptions.headers!.addAll(authorization);
+  //   }
+  //   requestOptions.headers!.addAll(getOtherHeader());
+  //
+  //   if (baseUrl.isNotEmpty) {
+  //     dio.options.baseUrl = baseUrl;
+  //   }
+  //
+  //   p.current.
+  //   dio.downloadUri(uri, savePath)
+  //
+  //   response = await dio.download(
+  //     urlPath,
+  //     '${(await getTemporaryDirectory()).path}google.html',
+  //   );
+  //
+  //
+  //   var response = await dio.post(
+  //     path,
+  //     data: data,
+  //     queryParameters: queryParameters,
+  //     options: requestOptions,
+  //     cancelToken: cancelToken,
+  //   );
+  //   return response.data;
+  // }
+
+  /*
+   * 下载文件
+   */
+  downloadFile(
+    urlPath,
+    savePath,
+  ) async {
+    var response;
+    try {
+      response = await dio.download(urlPath, savePath,
+          onReceiveProgress: (int count, int total) {
+        //进度
+        log("$count $total");
+      });
+      log('downloadFile success---------${response.data}');
+    } on DioError catch (e) {
+      log('downloadFile error---------$e');
+    }
     return response.data;
   }
 
@@ -411,6 +471,7 @@ class HttpUtil {
       options: requestOptions,
       cancelToken: cancelToken,
     );
+
     return response.data;
   }
 }

@@ -23,6 +23,5 @@ class RouteWelcomeMiddleware extends GetMiddleware {
       return const RouteSettings(name: AppRoutes.SING_IN);
     }
 
-    return const RouteSettings(name: AppRoutes.Application);
   }
 }

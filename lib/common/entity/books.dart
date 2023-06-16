@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 /// 组件分页 response
 class BookPageListResponseEntity {
   int count;
-  List<BooksVo>? results;
+  List<UploadBook>? results;
 
   BookPageListResponseEntity({
     required this.results,
@@ -15,8 +15,8 @@ class BookPageListResponseEntity {
         count: json["count"],
         results: json["results"] == null
             ? []
-            : List<BooksVo>.from(
-                json["results"].map((x) => BooksVo.fromJson(x))),
+            : List<UploadBook>.from(
+                json["results"].map((x) => UploadBook.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -26,51 +26,121 @@ class BookPageListResponseEntity {
       };
 }
 
-class BooksVo {
-  String? objectId;
+class UploadBook {
+  String? bookId;
+  String? bookName;
+  List? bookCovers;
 
-  String? fileName;
-  String? cover;
-  String? name;
-
-  String? updatedAt;
-
-  BooksVo({
+  UploadBook({
     Key? key,
-    this.objectId,
-    this.fileName,
-    this.cover,
-    this.name,
-    this.updatedAt,
+    this.bookId,
+    this.bookName,
+    this.bookCovers,
   });
 
   Map<String, dynamic> toJson() => {
-        "objectId": objectId,
-        "fileName": fileName,
-        "name": name,
-        "cover": cover,
-        "updatedAt": updatedAt,
+        "bookId": bookId,
+        "bookName": bookName,
+        "cover": bookCovers,
       };
 
-  factory BooksVo.fromJson(Map<String, dynamic> json) => BooksVo(
-        objectId: json["objectId"],
-        fileName: json["fileName"],
-        name: json["name"],
-        cover: json["cover"],
-        updatedAt: json["updatedAt"],
+  factory UploadBook.fromJson(Map<String, dynamic> json) => UploadBook(
+        bookId: json["bookId"],
+        bookName: json["bookName"],
+        bookCovers: json["bookCovers"],
       );
 
-  static convertImage(String name) {
-    return name.isEmpty ? null : AssetImage(name);
-  }
+}
 
-  static List<int> formatLinkTo(String links) {
-    if (links.isEmpty) {
-      return [];
-    }
-    if (!links.contains(',')) {
-      return [int.parse(links)];
-    }
-    return links.split(',').map<int>((e) => int.parse(e)).toList();
-  }
+
+
+
+class DownloadBookResponseEntity<T> {
+  String? msg;
+  int? code;
+  String? sign;
+  String? nonce;
+  DownloadBook? data;
+
+  DownloadBookResponseEntity({
+    this.msg,
+    this.code,
+    this.sign,
+    this.nonce,
+    this.data,
+  });
+
+  factory DownloadBookResponseEntity.fromJson(Map<String, dynamic> json) =>
+      DownloadBookResponseEntity(
+        msg: json["msg"],
+        code: json["code"],
+        sign: json["sign"],
+        nonce: json["nonce"],
+        data: DownloadBook.fromJson(json["data"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+    "msg": msg,
+    "code": code,
+    "sign": sign,
+    "nonce": nonce,
+    "data": data,
+  };
+}
+
+
+class DownloadBook {
+  String? bookId;
+  String? bookName;
+  String? bookCover;
+  String? encryptFilePath;
+  String? filePath;
+  String? downloadUrl;
+  String? rawDownloadUrl;
+  int? isUpload;
+  String? bookAuthor;
+  int? fileFormat;
+
+
+  DownloadBook({
+    Key? key,
+    this.bookId,
+    this.bookName,
+    this.bookCover,
+    this.encryptFilePath,
+    this.filePath,
+    this.downloadUrl,
+    this.rawDownloadUrl,
+    this.isUpload,
+    this.bookAuthor,
+    this.fileFormat
+  });
+
+
+  Map<String, dynamic> toJson() => {
+    "bookId": bookId,
+    "bookName": bookName,
+    "bookCover": bookCover,
+    "encryptFilePath": encryptFilePath,
+    "filePath": filePath,
+    "downloadUrl": downloadUrl,
+    "rawDownloadUrl": rawDownloadUrl,
+    "isUpload": isUpload,
+    "bookAuthor": bookAuthor,
+    "fileFormat": fileFormat,
+  };
+
+  factory DownloadBook.fromJson(Map<String, dynamic> json) => DownloadBook(
+    bookId: json["bookId"],
+    bookName: json["bookName"],
+    bookCover: json["bookCover"],
+    encryptFilePath: json["encryptFilePath"],
+    filePath: json["filePath"],
+    downloadUrl: json["downloadUrl"],
+    rawDownloadUrl: json["rawDownloadUrl"],
+    isUpload: json["isUpload"],
+    bookAuthor: json["bookAuthor"],
+    fileFormat: json["fileFormat"],
+  );
+
 }
