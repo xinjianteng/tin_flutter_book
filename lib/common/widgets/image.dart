@@ -2,28 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../values/values.dart';
 
 /// 缓存图片
 Widget netImageCached(
   String url, {
   double width = 48,
   double height = 48,
-  BorderRadiusGeometry? borderRadius=Borders.k0pxRadius,
+  double radius = 0,
   EdgeInsetsGeometry? margin,
   BoxFit fit = BoxFit.fitHeight,
 }) {
   return CachedNetworkImage(
     imageUrl: url,
     imageBuilder: (context, imageProvider) => Container(
-      height: height.h,
-      width: width.w,
+      height: height,
+      width: width,
       margin: margin,
       decoration: BoxDecoration(
-        borderRadius: borderRadius,
+        borderRadius: BorderRadius.all(Radius.circular(radius)),
         image: DecorationImage(
           image: imageProvider,
-          fit: fit,
+          fit:  BoxFit.cover,
           // colorFilter: ColorFilter.mode(Colors.red, BlendMode.colorBurn),
         ),
       ),

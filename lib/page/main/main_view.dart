@@ -162,26 +162,28 @@ class _MainPageState extends State<MainPage> {
         logic.getDownloadBookInfo(book);
       },
       child: Container(
-        // color: AppColors.orange,
         width: ScreenUtil().screenWidth,
-        height: 175.h,
+        height: Dimens.bookHeight + Dimens.margin,
+        margin: EdgeInsets.all(Dimens.margin),
         child: Stack(
           children: [
             Positioned(
               top: 0,
+              left: 0,
+              bottom: 0,
               child: DecoratedBox(
                 decoration: DecorationStyle.bookDecoration(),
                 child: netImageCached(
                   book.bookCovers![0].toString(),
-                  borderRadius: Borders.bookCoverRadius,
-                  width: 125.w,
-                  height: 175.h,
+                  radius: Dimens.bookCoverRadius,
+                  width: Dimens.bookWidth,
+                  height: Dimens.bookHeight,
                 ),
               ),
             ),
             Positioned(
-              top: Dimens.margin,
-              left: 125.w+Dimens.space,
+              left: Dimens.bookWidth + Dimens.space,
+              right: 0,
               child: Text(
                 book.bookName.toString(),
                 style: TextStyleUnit.bookNameStyle(),
@@ -189,7 +191,8 @@ class _MainPageState extends State<MainPage> {
             ),
             Positioned(
               bottom: 0,
-              left: 125.w+Dimens.space,
+              right: 0,
+              left: Dimens.bookWidth + Dimens.space,
               child: Text(
                 book.bookAuthor.toString(),
                 style: TextStyleUnit.bookNameStyle(),

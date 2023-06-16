@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Dimens {
@@ -21,7 +20,8 @@ class Dimens {
   static const double bookCoverRadius = 5.0;
   static  double btnHeight = 45.h;
 
-  static  double bookWidth = 125;
+  static  double bookWidth = 125.w;
+  static  double bookHeight = 175.h;
 
 
   static double getStatusBarHeight() {
