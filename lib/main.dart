@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(
+      designSize: const Size(
         Dimens.width,
         Dimens.height,
       ),

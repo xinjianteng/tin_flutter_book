@@ -21,7 +21,7 @@ class Dimens {
   static  double btnHeight = 45.h;
 
   static  double bookWidth = 125.w;
-  static  double bookHeight = 175.h;
+  static  double bookHeight = 175.w;
 
 
   static double getStatusBarHeight() {

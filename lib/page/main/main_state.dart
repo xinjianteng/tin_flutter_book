@@ -14,9 +14,6 @@ class MainState {
   RxList<UploadBook> newsList = <UploadBook>[].obs;
 
 
-  //列表显示样式，1=listview  2：Gridview
-  RxInt viewStyle=1.obs;
-
   var crossAxisCount = ScreenUtil().screenWidth ~/ Dimens.bookWidth;
 
 

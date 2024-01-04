@@ -33,14 +33,7 @@ class MainLogic extends GetxController {
     super.onInit();
   }
 
-  void switchViewStyle(){
-    if(state.viewStyle.value==1){
-      state.viewStyle.value==2;
-    }else{
-      state.viewStyle.value==1;
-    }
-    onRefresh();
-  }
+
 
 
   void onTop() {
@@ -109,7 +102,7 @@ class MainLogic extends GetxController {
 
     writeString("ssss");
 
-    HttpUtil().downloadFile(response.data!.downloadUrl, "E:\\");
+    HttpUtil().downloadFile(response.data!.downloadUrl, _getLocalDocumentFile());
 
     log(response.toString());
   }

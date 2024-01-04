@@ -27,7 +27,7 @@ class _MainPageState extends State<MainPage> {
       appBar: transparentAppBar(title: '书库', actions: [
         IconButton(
           onPressed: () {
-            logic.switchViewStyle();
+            // logic.switchViewStyle();
           },
           icon: const Icon(Icons.grid_view_sharp),
         ),
@@ -63,94 +63,28 @@ class _MainPageState extends State<MainPage> {
               loadingText: '刷新中',
               idleText: '上拉加载',
             ),
-            child: state.viewStyle.value == 1
-                ? ListView.builder(
-                    itemBuilder: (c, i) => Card(
-                        child:
-                            Center(child: _builtListItem(state.newsList[i]))),
-                    itemCount: state.newsList.length,
-                  )
-                : GridView.builder(
-                    itemCount: state.newsList.length,
-                    scrollDirection: Axis.vertical,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      //网格代理：定交叉轴数目
-                      crossAxisCount: state.crossAxisCount, //条目个数
-                      mainAxisSpacing: 0, //主轴间距
-                      crossAxisSpacing: 0, //交叉轴间距
-                      // childAspectRatio: 1 / 0.618,
-                    ),
-                    itemBuilder: (_, int position) =>
-                        _builtListItem(state.newsList[position])),
+            child: ListView.builder(
+              itemBuilder: (c, i) => Card(
+                elevation: 4,
+                child: _builtListItem(state.newsList[i]),
+              ),
+              itemCount: state.newsList.length,
+            ),
+
+            // child: GridView.builder(
+            //     itemCount: state.newsList.length,
+            //     scrollDirection: Axis.vertical,
+            //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            //       //网格代理：定交叉轴数目
+            //       crossAxisCount: state.crossAxisCount, //条目个数
+            //       mainAxisSpacing: 0, //主轴间距
+            //       crossAxisSpacing: 0, //交叉轴间距
+            //       // childAspectRatio: 1 / 0.618,
+            //     ),
+            //     itemBuilder: (_, int position) =>
+            //         _builtGridViewItem(state.newsList[position])),
           );
         },
-      ),
-    );
-  }
-
-  Widget _builtItem(UploadBook book) {
-    var width = (Dimens.width - 5) / 2;
-    var imgHeight = width / 0.75;
-
-    return GestureDetector(
-      onTap: () {
-        // AppNavigator.pushNovelDetail(context, novel);
-        logic.getDownloadBookInfo(book);
-      },
-      child: Container(
-        color: AppColors.orange,
-        width: width.w,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            netImageCached(
-              book.bookCovers![0].toString(),
-              width: width.w,
-              // fit: width < imgHeight ? BoxFit.fitHeight : BoxFit.fitWidth,
-              height: imgHeight.h,
-            ),
-            SizedBox(height: 5.h),
-            Text(
-              book.bookName.toString(),
-              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-              maxLines: 1,
-            ),
-            SizedBox(height: 3.h),
-            Text(
-              book.bookName.toString(),
-              style: const TextStyle(fontSize: 12, color: AppColors.inputColor),
-              maxLines: 1,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _builtItem2(UploadBook book) {
-    var width = ScreenUtil().screenWidth / 2;
-    var imgHeight = width / 0.75;
-
-    return GestureDetector(
-      onTap: () {
-        // AppNavigator.pushNovelDetail(context, novel);
-        logic.getDownloadBookInfo(book);
-      },
-      child: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: netImageCached(
-              book.bookCovers![0].toString(),
-              width: width,
-              // fit: width < imgHeight ? BoxFit.fitHeight : BoxFit.fitWidth,
-              height: imgHeight,
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -171,35 +105,85 @@ class _MainPageState extends State<MainPage> {
               top: 0,
               left: 0,
               bottom: 0,
-              child: DecoratedBox(
-                decoration: DecorationStyle.bookDecoration(),
-                child: netImageCached(
-                  book.bookCovers![0].toString(),
-                  radius: Dimens.bookCoverRadius,
-                  width: Dimens.bookWidth,
-                  height: Dimens.bookHeight,
-                ),
-              ),
+              child: _buildBookCover(book.bookCovers![0].toString()),
             ),
             Positioned(
               left: Dimens.bookWidth + Dimens.space,
               right: 0,
+              top: Dimens.margin,
               child: Text(
-                book.bookName.toString(),
+                '${book.bookName}',
                 style: TextStyleUnit.bookNameStyle(),
               ),
             ),
             Positioned(
-              bottom: 0,
+              bottom: Dimens.margin,
               right: 0,
               left: Dimens.bookWidth + Dimens.space,
               child: Text(
-                book.bookAuthor.toString(),
+                '${book.bookAuthor}',
                 style: TextStyleUnit.bookNameStyle(),
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+
+
+
+
+  Widget _builtGridViewItem(UploadBook book) {
+
+    return GestureDetector(
+      onTap: () {
+        // AppNavigator.pushNovelDetail(context, novel);
+        logic.getDownloadBookInfo(book);
+      },
+      child: Container(
+        margin: EdgeInsets.all(Dimens.space),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              bottom: 0,
+              child: _buildBookCover(book.bookCovers![0].toString()),
+            ),
+            Positioned(
+              left: Dimens.bookWidth + Dimens.space,
+              right: 0,
+              top: Dimens.margin,
+              child: Text(
+                '${book.bookName}',
+                style: TextStyleUnit.bookNameStyle(),
+              ),
+            ),
+            Positioned(
+              bottom: Dimens.margin,
+              right: 0,
+              left: Dimens.bookWidth + Dimens.space,
+              child: Text(
+                '${book.bookAuthor}',
+                style: TextStyleUnit.bookNameStyle(),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBookCover(String cover) {
+    return DecoratedBox(
+      decoration: DecorationStyle.bookDecoration(),
+      child: netImageCached(
+        cover,
+        radius: Dimens.bookCoverRadius,
+        width: Dimens.bookWidth,
+        height: Dimens.bookHeight,
       ),
     );
   }

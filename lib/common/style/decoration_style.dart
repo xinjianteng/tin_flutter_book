@@ -37,8 +37,9 @@ class DecorationStyle{
   static BoxDecoration bookDecoration() {
     return BoxDecoration(
       shape: BoxShape.rectangle,
-      color: AppColors.inputColor,
+      color: AppColors.bookName,
       borderRadius: BorderRadius.circular(Dimens.bookCoverRadius),
+        boxShadow: [BoxShadow(color: AppColors.divider, blurRadius: 1)],
     );
   }
 
