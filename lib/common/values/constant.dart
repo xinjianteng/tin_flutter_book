@@ -11,8 +11,6 @@ const CACHE_MAXCOUNT = 100;
 /// 用户 - 配置信息
 const String STORAGE_USER_PROFILE_KEY = 'user_profile';
 
-/// 用户 - 配置信息
-const String STORAGE_USER_TOKEN_KEY = 'user_token';
 
 
 /// 设备是否第一次打开

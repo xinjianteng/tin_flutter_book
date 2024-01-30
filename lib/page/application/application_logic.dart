@@ -17,7 +17,6 @@ class ApplicationLogic extends GetxController {
   late final List<BottomNavigationBarItem> bottomTabs;
 
 
-
   @override
   void onInit() {
     super.onInit();

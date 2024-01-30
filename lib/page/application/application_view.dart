@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 
 import '../../common/values/values.dart';
 import '../../common/widgets/widgets.dart';
+import '../book_main/book_main_view.dart';
+import '../book_shelf/book_shelf_view.dart';
 import '../main/main_view.dart';
 import 'application_logic.dart';
 
@@ -11,6 +13,8 @@ class ApplicationPage extends StatelessWidget {
 
   final logic = Get.put(ApplicationLogic());
   final state = Get.find<ApplicationLogic>().state;
+
+   ApplicationPage({super.key});
 
 
   @override
@@ -26,12 +30,11 @@ class ApplicationPage extends StatelessWidget {
   Widget _buildPageView() {
     return PageView(
       // physics: const NeverScrollableScrollPhysics(),
-      children: <Widget>[
-        MainPage(),
-        // CategoryPage(),
-        const Text('BookmarksPage'),
-        const Text('BookmarksPage'),
-        const Text('AccountPage'),
+      children:  <Widget>[
+        BookMainPage(),
+        BookShelfPage(),
+        Text('BookmarksPage'),
+        Text('AccountPage'),
       ],
       controller: logic.pageController,
       onPageChanged: logic.handlePageChanged,

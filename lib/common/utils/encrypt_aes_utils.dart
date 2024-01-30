@@ -9,24 +9,24 @@ class EncryptAesUtils{
 
   // /content：被加密数据，keyStr：加密key， ivStr
   static String encryptAES(String content, String keyStr, String ivStr) {
-    log("AES加密前的文本:$content");
+    logPrint("AES加密前的文本:$content");
     final plainText = content;
     final key = encrypt.Key.fromUtf8(keyStr);
     final iv = encrypt.IV.fromUtf8(ivStr);
     final encrypter = encrypt.Encrypter(encrypt.AES(key, mode: encrypt.AESMode.cbc));
     final encrypted = encrypter.encrypt(plainText, iv: iv);
     final encryptStr = encrypted.base64;
-    log("AES加密后的文本:$encryptStr");
+    logPrint("AES加密后的文本:$encryptStr");
     return encryptStr;
   }
 
   static decryptAES(String content, String keyStr, String ivStr) {
-    log("AES解密前的文本:$content");
+    logPrint("AES解密前的文本:$content");
     final key = encrypt.Key.fromUtf8(keyStr);
     final iv = encrypt.IV.fromUtf8(ivStr);
     final encrypter = encrypt.Encrypter(encrypt.AES(key, mode: encrypt.AESMode.cbc));
     final decrypted = encrypter.decrypt64(content, iv: iv);
-    log("AES解密后的文本:$decrypted");
+    logPrint("AES解密后的文本:$decrypted");
   }
 
 }

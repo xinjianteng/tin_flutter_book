@@ -60,14 +60,14 @@ class DownloadBookResponseEntity<T> {
   int? code;
   String? sign;
   String? nonce;
-  DownloadBook? data;
+  DownloadBook data;
 
   DownloadBookResponseEntity({
     this.msg,
     this.code,
     this.sign,
     this.nonce,
-    this.data,
+    required this.data,
   });
 
   factory DownloadBookResponseEntity.fromJson(Map<String, dynamic> json) =>

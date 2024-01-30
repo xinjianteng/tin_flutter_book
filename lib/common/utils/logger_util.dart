@@ -5,7 +5,7 @@ class LoggerUtil {
   static void write(String text, {bool isError = false}) {
     Future.microtask(() => print('** $text. isError: [$isError]'));
 
-    log(text);
+    logPrint(text);
   }
 
   static final Logger logger = Logger(
@@ -57,7 +57,7 @@ enum LoggerType {
 }
 
 /// 模仿print，给出一个全局函数，方便调用
-void log(
+void logPrint(
   dynamic message, {
   LoggerType type = LoggerType.info,
 }) {

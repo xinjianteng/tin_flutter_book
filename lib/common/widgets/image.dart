@@ -1,11 +1,14 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tin_flutter_book/common/utils/http.dart';
 
 
 /// 缓存图片
 Widget netImageCached(
-  String url, {
+  String path, {
   double width = 48,
   double height = 48,
   double radius = 0,
@@ -13,7 +16,7 @@ Widget netImageCached(
   BoxFit fit = BoxFit.fitHeight,
 }) {
   return CachedNetworkImage(
-    imageUrl: url,
+    imageUrl: path,
     imageBuilder: (context, imageProvider) => Container(
       height: height,
       width: width,
@@ -30,12 +33,12 @@ Widget netImageCached(
     placeholder: (context, url) {
       return Container(
         alignment: Alignment.center,
-        child: CircularProgressIndicator(
+        child: const CircularProgressIndicator(
           value: null,
         ),
       );
     },
-    errorWidget: (context, url, error) => Icon(Icons.error),
+    errorWidget: (context, url, error) => const Icon(Icons.error),
   );
 }
 
@@ -44,6 +47,8 @@ Widget netImageCircleCached(
   double radius = 50,
   EdgeInsetsGeometry? margin,
 }) {
+
+
   return CachedNetworkImage(
     imageUrl: url,
     placeholder: (context, url) => CircleAvatar(
@@ -56,3 +61,39 @@ Widget netImageCircleCached(
     ),
   );
 }
+
+
+
+//
+// Color getDominantColorFromImage(Uint8List imageData) {
+//   final image = img.decodeImage(imageData)!;
+//   final width = image.width;
+//   final height = image.height;
+//   int rSum = 0, gSum = 0, bSum = 0;
+//
+//   for (var x = 0; x < width; x++) {
+//     for (var y = 0; y < height; y++) {
+//       final pixel = image.getPixel(x, y);
+//       rSum += img.getRed(pixel);
+//       gSum += img.getGreen(pixel);
+//       bSum += img.getBlue(pixel);
+//     }
+//   }
+//
+//   final totalPixels = width * height;
+//   final averageR = rSum ~/ totalPixels;
+//   final averageG = gSum ~/ totalPixels;
+//   final averageB = bSum ~/ totalPixels;
+//
+//   return Color.fromRGBO(averageR, averageG, averageB, 1.0);
+// }
+//
+// // 使用示例
+// Future<Color> fetchDominantColor(String imageUrl) async {
+//   final response = await http.get(Uri.parse(imageUrl));
+//   if (response.statusCode == 200) {
+//     return getDominantColorFromImage(response.bodyBytes);
+//   } else {
+//     throw Exception('Failed to load image');
+//   }
+// }

@@ -14,14 +14,15 @@ class RegisterPage extends StatelessWidget {
     final state = Get.find<RegisterLogic>().state;
 
     return Scaffold(
-      appBar: transparentAppBar(title:"注册",leading: const BackButton()),
-      backgroundColor: Colors.white,
+      appBar: transparentAppBar(
+        title: "注册",
+        leading: const BackButton(
+          color: AppColors.btn,
+        ),
+      ),
       body: buildBody(logic),
     );
   }
-
-
-
 
   Widget buildBody(RegisterLogic logic) {
     return Column(
@@ -57,7 +58,6 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-
   Widget buildPhone(RegisterLogic logic) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -78,8 +78,6 @@ class RegisterPage extends StatelessWidget {
     );
   }
 
-
-
   Widget buildPassword(RegisterLogic logic) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -99,5 +97,4 @@ class RegisterPage extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -3,20 +3,7 @@ import 'package:flutter/material.dart';
 
 class AppColors {
 
-  /// 主控件-背景 蓝色
-  static const Color primaryButton = Color(0xFF4B9CFF);
-  /// 主文本 灰色
-  static const Color primaryText = Color(0xff333333);
-
-  /// nav 默认颜色 灰色
-  static const Color divider =  Color(0xffdddddd);
-
-  /// 边框颜色
-  static const Color inputColor = Color(0xFFF2F3F4);
-  static const Color bookName = Color(0xFF09172F);
-
-
-
+//  基础颜色
   static const Color primary = Color(0xFF23B38E);
   static const Color secondary = Color(0xFF51DEC6);
   static const Color red = Color(0xFFFF2B45);
@@ -28,6 +15,55 @@ class AppColors {
   static const Color gray = Color(0xFF888888);
   static const Color blue = Color(0xFF3688FF);
   static const Color golden = Color(0xff8B7961);
+
+  /// 按钮颜色
+  static const Color btn = Color(0xFFFF5543 );
+  /// 按钮字体颜色
+  static const Color btnFont = Color(0xFFFFFFFF );
+  /// 输入框 提示字灰色
+  static const Color hint = Color(0xFFD0D0D0);
+  /// 应用背景色
+  static const Color appBg = white;
+  /// 输入框  字体颜色
+  static const Color inputText = Color(0xFF333333);
+  /// 标题  字体颜色
+  static const Color title = Color(0xFF333333);
+  /// 返回键 颜色
+  static const Color back = Color(0xFF333333);
+  ///图书封面颜色
+  static const Color bookCover = Color(0xFF09172F);
+  ///常规图书列表  图书名称字体颜色
+  static const Color bookName = Color(0xFF333333);
+  ///常规图书列表  图书作者字体颜色
+  static const Color bookAuthor = Color(0xFF999999);
+  ///线性
+  static const Color line = Color(0xFFAEAEB0);
+
+
+  /// nav 默认颜色 灰色
+  static const Color navNormal =  Color(0xff959595);
+
+
+
+
+
+  /// 主控件-背景 蓝色
+  static const Color primaryButton = Color(0xFF4B9CFF);
+
+  /// 主文本 灰色
+  static const Color primaryText = Color(0xff333333);
+
+
+  /// nav 默认颜色 灰色
+  static const Color divider =  Color(0xffdddddd);
+
+  /// 边框颜色
+  static const Color inputColor = Color(0xFFF2F3F4);
+
+
+
+
+
 
 
   /// tabBar 默认颜色 灰色
@@ -41,11 +77,6 @@ class AppColors {
   /// 次要文本颜色
   static const Color secondaryText = Color(0xFF74788D);
 
-
-  /// nav 选中颜色 蓝色
-  static const Color navSelect = blue;
-  /// nav 默认颜色 灰色
-  static const Color navNormal =  Color(0xff959595);
 
 
 
@@ -142,5 +173,6 @@ class AppColors {
   static const Color mainBackgroundColor = miWhite;
 
   static const Color mainTextColor = primaryDarkValue;
+
 
 }

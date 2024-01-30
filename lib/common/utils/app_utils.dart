@@ -1,4 +1,10 @@
+
+import 'dart:io';
 import 'dart:math';
+
+import 'package:path_provider/path_provider.dart';
+
+import 'logger_util.dart';
 
 class AppUtils {
   /// 获取时间戳
@@ -27,6 +33,16 @@ class AppUtils {
   }
 
 
+
+  Future<String> getDownloadPath() async {
+    final directory = Platform.isAndroid
+        ? await getExternalStorageDirectory() // 对于Android，通常选择外部存储目录
+        : await getApplicationDocumentsDirectory(); // 对于iOS，默认使用应用文档目录
+
+    var path='${directory!.path}/downloads';
+    logPrint("下载路径：$path");
+    return path; // 指定子目录为'downloads'
+  }
 
 
 

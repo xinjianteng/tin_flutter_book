@@ -15,7 +15,8 @@ import 'global.dart';
 
 Future<void>  main() async{
   await Global.init();
-
+// Add this line
+  await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
 }
 
@@ -25,20 +26,41 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context);
     return ScreenUtilInit(
       designSize: const Size(
         Dimens.width,
         Dimens.height,
       ),
+
       // 是否根据宽度/高度中的最小值适配文字
       minTextAdapt: true,
       // 支持分屏尺寸
       splitScreenMode: true,
       builder: (context, child) => RefreshConfiguration(
         // 配置默认头部指示器,假如你每个页面的头部指示器都一样的话,你需要设置这个
-        headerBuilder: () => const ClassicHeader(),
-        // 配置默认底部指示器
-        footerBuilder: () => const ClassicFooter(),
+        // headerBuilder: () => const ClassicHeader(),
+        // // 配置默认底部指示器
+        // footerBuilder: () => const ClassicFooter(),
+
+
+        headerBuilder: ()=> const ClassicHeader(
+          //无特殊要求就可以用这个换下文案就行了
+          height: 45.0,
+          releaseText: '松开刷新',
+          refreshingText: '刷新中',
+          completeText: '刷新完成',
+          idleText: '下拉刷新',
+        ),
+        footerBuilder: ()=> const ClassicFooter(
+          //无特殊要求就可以用这个换下文案就行了
+          loadStyle: LoadStyle.ShowWhenLoading,
+          completeDuration: Duration(microseconds: 50),
+          canLoadingText: '松开刷新',
+          noDataText: '没有更多数据啦',
+          loadingText: '刷新中',
+          idleText: '上拉加载',
+        ),
         // Viewport不满一屏时,禁用上拉加载更多功能
         hideFooterWhenNotFull: true,
         // 头部触发刷新的越界距离
@@ -57,7 +79,7 @@ class MyApp extends StatelessWidget {
         enableBallisticLoad: true,
         child: GetMaterialApp(
           title: AStrings.appName,
-          theme: AppTheme.light,
+          // theme: AppTheme.light,
           debugShowCheckedModeBanner: false,
           initialRoute: AppPages.INITIAL,
           getPages: AppPages.routes,

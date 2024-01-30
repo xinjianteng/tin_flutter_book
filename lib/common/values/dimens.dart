@@ -1,6 +1,7 @@
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Dimens {
+  // 设计稿中设备的屏幕尺寸
   static const double width = 375.0;
   static const double height = 812.0;
 
@@ -14,43 +15,42 @@ class Dimens {
   static const double menuBigSize = 144.0;
   // static const double elevation = 1.0;
 
-  static  double margin = 12.0.w;
-  static  double space = 5.0.w;
-  static const double btnRadius = 5.0;
-  static const double bookCoverRadius = 5.0;
-  static  double btnHeight = 45.h;
+  static  double margin = 17.0.w;
 
-  static  double bookWidth = 125.w;
-  static  double bookHeight = 175.w;
+  static  double space = 5.0.w;
+  static  double btnRadius = 5.w;
+//  图书封面圆角
+  static  double bookCoverRadius = 3.r;
+  static  double btnHeight = 44.h;
+
+  static  double bookWidth = 83.w;
+  static  double bookHeight = 116.h;
+
+  static  double bookWidthMAX = 108.w;
+  static  double bookHeightMAX = 154.h;
+
+
+  static  double btnWidthMin = 48.w;
+  static  double btnHeightMin = 12.h;
+
+  static  double btnWidthNor = 72.w;
+  static  double btnHeightNor = 20.h;
+
+  static  double btnWidthMax = 343.w;
+  static  double btnHeightMax = 40.h;
+
+  static  double btnFontMin = 12.sp;
+  static  double btnFontNor = 14.sp;
+  static  double btnFontMax = 16.sp;
+
+  static  double btnRadiusMin = 3.r;
+  static  double btnRadiusNor = 16.r;
+  static  double btnRadiusMax = 22.r;
 
 
   static double getStatusBarHeight() {
     return ScreenUtil().statusBarHeight;
   }
-
-  // static double getHeight(num value) {
-  //   return value.h;
-  // }
-  //
-  // static double getSHeight() {
-  //   return ScreenUtil().screenHeight;
-  // }
-  //
-  // static double getWidth(num value) {
-  //   return ScreenUtil().setWidth(value);
-  // }
-  //
-  // static double getSWidth() {
-  //   return ScreenUtil().screenWidth;
-  // }
-  //
-  // static Size getSize() {
-  //   return  Size(Dimens.getSWidth(), Dimens.getSHeight());
-  // }
-  //
-  // static double getSp(num value) {
-  //   return ScreenUtil().setSp(value);
-  // }
 
 
 

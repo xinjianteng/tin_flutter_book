@@ -95,17 +95,14 @@ class MainLogic extends GetxController {
   }
 
 
-  Future<void>  getDownloadBookInfo(UploadBook uploadBook) async{
-    var response =await CsgAPI.downloadBook(
-      params: uploadBook
-    );
-
-    writeString("ssss");
-
-    HttpUtil().downloadFile(response.data!.downloadUrl, _getLocalDocumentFile());
-
-    log(response.toString());
-  }
+  // Future<void>  getDownloadBookInfo(UploadBook uploadBook) async{
+  //   var response =await CsgAPI.downloadBook(
+  //     params: uploadBook
+  //   );
+  //
+  //   HttpUtil().downloadFile(response.data!.downloadUrl, _getLocalDocumentFile());
+  //
+  // }
 
 
   /// 获取文档目录文件

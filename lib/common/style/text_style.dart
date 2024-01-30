@@ -7,41 +7,72 @@ import '../values/values.dart';
 class TextStyleUnit {
   // 全局 appbar标题
   static TextStyle appbar = TextStyle(
-    fontWeight: FontWeight.normal,
-    fontSize: 34.sp,
+    fontWeight: FontWeight.bold,
+    fontSize: 18.sp,
+    color: AppColors.title
   );
+
+  /// 按钮 字体样式
+  static ButtonStyle btnStyle() {
+    return TextButton.styleFrom(
+      backgroundColor: AppColors.btn,
+      elevation: 2.h,
+      shadowColor:AppColors.btn,
+    );
+  }
+
+  /// 按钮 字体样式
+  static TextStyle btnTextStyle() {
+    return TextStyle(
+      color: AppColors.white,
+      fontSize: 16.sp,
+    );
+  }
 
   // 编辑框
   static TextStyle input = TextStyle(
-    color: AppColors.primaryText,
-    fontSize: 16.sp,
+    color: AppColors.inputText,
+    fontSize: 14.sp,
   );
 
   // 编辑框 提示语
   static TextStyle hint = TextStyle(
-    color: AppColors.primaryText,
-    fontSize: 16.sp,
+    color: AppColors.hint,
+    fontSize: 14.sp,
   );
 
-  /// 不传值 代表获取当前时间戳
-  static TextStyle btnTextStyle() {
-    return TextStyle(
-      color: AppColors.white,
-      fontSize: 24.sp,
-      // fontWeight: FontWeight.bold,
-    );
-  }
-  /// 不传值 代表获取当前时间戳
+
+
+  /// 常规图书列表  图书名称样式
   static TextStyle bookNameStyle() {
     return TextStyle(
       color: AppColors.bookName,
-      fontSize: 22.sp,
+      fontSize: 14.sp,
+      // fontWeight: FontWeight.bold,
+    );
+  }
+
+  /// 常规图书列表  图书名称样式
+  static TextStyle bookNameStyle2() {
+    return TextStyle(
+      color: AppColors.bookName,
+      fontSize: 20.sp,
       // fontWeight: FontWeight.bold,
     );
   }
 
 
-///——————————————————————————————————————————————///
+  /// 常规图书列表  图书作者样式
+  static TextStyle bookAuthorStyle() {
+    return TextStyle(
+      color: AppColors.bookAuthor,
+      fontSize: 12.sp,
+    );
+  }
+
+
+
+  ///——————————————————————————————————————————————///
 
   // 标题加黑
   TextStyle navSelect = TextStyle(

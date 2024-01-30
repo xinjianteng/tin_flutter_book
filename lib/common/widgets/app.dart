@@ -4,6 +4,9 @@ import 'package:tin_flutter_book/common/style/style.dart';
 
 import '../values/values.dart';
 
+
+
+
 /// 通用 AppBar
 AppBar transparentAppBar({
   String? title,
@@ -11,7 +14,7 @@ AppBar transparentAppBar({
   List<Widget>? actions,
 }) {
   return AppBar(
-    backgroundColor: Colors.transparent,
+    backgroundColor: AppColors.appBg,
     title: Text(
       title!,
       style: TextStyleUnit.appbar,
@@ -25,10 +28,10 @@ AppBar transparentAppBar({
 /// 10像素 Divider
 Widget dividerLine({
   Color bgColor = AppColors.divider,
-  double heightSize = 2,
+  double heightSize = 1,
 }) {
   return Container(
-    height: heightSize.w,
+    height: heightSize.h,
     decoration: BoxDecoration(
       color: bgColor,
     ),

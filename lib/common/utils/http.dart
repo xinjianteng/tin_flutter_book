@@ -9,6 +9,7 @@ import 'package:tin_flutter_book/common/utils/utils.dart';
 import 'package:tin_flutter_book/common/values/values.dart';
 import 'package:tin_flutter_book/common/widgets/widgets.dart';
 
+import '../routers/routes.dart';
 import '../store/stores.dart';
 
 import 'package:path/path.dart' as p;
@@ -108,7 +109,7 @@ class HttpUtil {
 
   // 错误处理
   void onError(ErrorEntity eInfo) {
-    log('error.code -> ${eInfo.code}, error.message -> ${eInfo.message}');
+    logPrint('error.code -> ${eInfo.code}, error.message -> ${eInfo.message}');
     switch (eInfo.code) {
       case 401:
         // UserStore.to.onLogout();
@@ -144,7 +145,9 @@ class HttpUtil {
               case 400:
                 return ErrorEntity(code: errCode, message: "请求语法错误");
               case 401:
-                return ErrorEntity(code: errCode, message: "没有权限");
+                // return ErrorEntity(code: errCode, message: "没有权限");
+                 Get.toNamed(AppRoutes.SING_IN);
+                return ErrorEntity(code: errCode, message: "登录过期，请重新登录");
               case 403:
                 return ErrorEntity(code: errCode, message: "服务器拒绝执行");
               case 404:
@@ -194,7 +197,7 @@ class HttpUtil {
   /// 读取本地用户配置
   Map<String, dynamic>? getAuthorizationHeader() {
     var headers = <String, dynamic>{};
-    if (Get.isRegistered<UserStore>() && UserStore.to.hasToken == true) {
+    if (Get.isRegistered<UserStore>() && UserStore.to.isLogin == true) {
       headers['Authorization'] = 'Bearer ${UserStore.to.token}';
       headers['LoginRequired'] = 'necessary';
     } else {
@@ -207,14 +210,14 @@ class HttpUtil {
   Map<String, dynamic> getOtherHeader() {
     var headers = <String, dynamic>{};
     headers['deviceId'] = '2e33f78a-e0fb-4cd2-8193-f2efb7e8b3b0';
-    headers['appVersion'] = '8.5.0';
-    headers['appVersionNo'] = '514337';
+    headers['appVersion'] = '8.5.7';
+    headers['appVersionNo'] = '514339';
     headers['deviceModel'] = '2107119DC';
     headers['deviceFactory'] = 'Xiaomi';
     headers['osType'] = '1';
     headers['osVersion'] = '33';
     headers['netType'] = '1';
-    headers['channel'] = '1';
+    headers['channel'] = '99';
     return headers;
   }
 
@@ -339,18 +342,15 @@ class HttpUtil {
    */
   downloadFile(
     urlPath,
-    savePath,
+    savePath, {required Null Function(int count, int total) onReceiveProgress}
   ) async {
     var response;
     try {
       response = await dio.download(urlPath, savePath,
-          onReceiveProgress: (int count, int total) {
-        //进度
-        log("$count $total");
-      });
-      log('downloadFile success---------${response.data}');
+          onReceiveProgress: onReceiveProgress);
+      logPrint('downloadFile success---------${response.data}');
     } on DioError catch (e) {
-      log('downloadFile error---------$e');
+      logPrint('downloadFile error---------$e');
     }
     return response.data;
   }

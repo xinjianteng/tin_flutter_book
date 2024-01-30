@@ -21,7 +21,7 @@ class RegisterLogic extends GetxController {
     UserRegisterRequestEntity registerParams =
     UserRegisterRequestEntity(username: phone,email: "xxx", password: password);
 
-    UserRegisterRequestEntity registerUser = await UserAPI.register(params: registerParams);
+    UserRegisterRequestEntity registerUser = await BmobAPI.register(params: registerParams);
 
   }
 

@@ -93,7 +93,7 @@ class _MainPageState extends State<MainPage> {
     return GestureDetector(
       onTap: () {
         // AppNavigator.pushNovelDetail(context, novel);
-        logic.getDownloadBookInfo(book);
+        // logic.getDownloadBookInfo(book);
       },
       child: Container(
         width: ScreenUtil().screenWidth,
@@ -140,7 +140,7 @@ class _MainPageState extends State<MainPage> {
     return GestureDetector(
       onTap: () {
         // AppNavigator.pushNovelDetail(context, novel);
-        logic.getDownloadBookInfo(book);
+        // logic.getDownloadBookInfo(book);
       },
       child: Container(
         margin: EdgeInsets.all(Dimens.space),

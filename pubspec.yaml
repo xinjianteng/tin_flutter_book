@@ -47,7 +47,7 @@ dependencies:
 
 
   # 屏幕适配  https://github.com/OpenFlutter/flutter_screenutil
-  flutter_screenutil: ^5.8.3
+  flutter_screenutil: ^5.9.0
 
   # 下拉刷新  # 刷新  https://github.com/peng8350/flutter_pulltorefresh/blob/master/README_CN.md
   pull_to_refresh: ^2.0.0
@@ -59,12 +59,18 @@ dependencies:
   logger: ^1.1.0
   shared_preferences: ^2.0.17
 
+
+
   # 包信息
   package_info: ^2.0.0
 
   crypto: ^3.0.3
   encrypt: ^5.0.1
   path_provider: ^2.0.15
+  permission_handler: ^11.2.0
+
+  sqflite: ^2.3.1
+
 
 dev_dependencies:
   flutter_test:
@@ -92,8 +98,8 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-#  assets:
-#    - assets/fifa/agt.png
+  assets:
+    - assets/ic_launcher.png
 #    - assets/fifa/bx.png
 #    - assets/fifa/fg.png
 #    - assets/fifa/hl.png

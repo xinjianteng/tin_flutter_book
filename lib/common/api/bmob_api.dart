@@ -6,7 +6,7 @@ import '../utils/utils.dart';
 import '../values/values.dart';
 
 /// 用户
-class UserAPI {
+class BmobAPI {
 
   /// 登录
   static Future<UserLoginResponseEntity> login({

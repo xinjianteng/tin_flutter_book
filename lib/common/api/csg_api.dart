@@ -59,10 +59,11 @@ class CsgAPI {
     var nonce = AppUtils.getNonce();
     Map<String, String> formData = {};
     formData["current"] = params!.current.toString();
+    // formData["size"] = params!.size.toString();
     formData["from"] = 'APP';
     formData["nonce"] = nonce;
     formData["timestamp"] = timeStamp.toString();
-    // formData["size"] = params!.size.toString();
+
     // formData["isGroup"] = '0';
     // formData["sort"] = '2';
 
@@ -91,7 +92,7 @@ class CsgAPI {
 
   /// 登录
   static Future<DownloadBookResponseEntity> downloadBook({
-    UploadBook? params,
+    required String bookId,
   }) async {
     var timeStamp = AppUtils.getTime();
     var nonce = AppUtils.getNonce();
@@ -101,7 +102,7 @@ class CsgAPI {
     // formData['deviceFactory'] = 'Xiaomi';
     // formData['osType'] = '1';
     // formData['deviceId'] = '2e33f78a-e0fb-4cd2-8193-f2efb7e8b3b0';
-    formData['bookId'] = params!.bookId.toString();
+    formData['bookId'] = bookId.toString();
     // formData["scope"] = "app";
     formData["nonce"] = nonce;
     formData["timestamp"] = timeStamp.toString();

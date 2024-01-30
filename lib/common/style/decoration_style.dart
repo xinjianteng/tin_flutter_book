@@ -4,8 +4,7 @@ import 'package:flutter/widgets.dart';
 import '../values/values.dart';
 import 'style.dart';
 
-class DecorationStyle{
-
+class DecorationStyle {
   // color 设置背景颜色
   // shape 设置形状
   // border 设置边框
@@ -13,18 +12,14 @@ class DecorationStyle{
   // boxShadow 设置阴影
   // gradient 设置渐变色背景
 
-
-
-  static BoxDecoration input=BoxDecoration(
+  static BoxDecoration input = BoxDecoration(
     shape: BoxShape.rectangle,
-    color: AppColors.inputColor,
+    color: AppColors.appBg,
     borderRadius: BorderRadius.circular(Dimens.btnRadius),
   );
 
-
-
   /// 不传值 代表获取当前时间戳
-   static InputDecoration inputDecoration({required String hintStr}) {
+  static InputDecoration inputDecoration({required String hintStr}) {
     return InputDecoration(
       hintText: hintStr,
       hintStyle: TextStyleUnit.hint,
@@ -32,24 +27,17 @@ class DecorationStyle{
     );
   }
 
-
   /// 不传值 代表获取当前时间戳
   static BoxDecoration bookDecoration() {
     return BoxDecoration(
       shape: BoxShape.rectangle,
-      color: AppColors.bookName,
+      color: AppColors.bookCover,
       borderRadius: BorderRadius.circular(Dimens.bookCoverRadius),
-        boxShadow: [BoxShadow(color: AppColors.divider, blurRadius: 1)],
     );
   }
 
-
-  static BoxDecoration btn=BoxDecoration(
+  static BoxDecoration btn = BoxDecoration(
     borderRadius: BorderRadius.circular(Dimens.btnRadius),
-    color: AppColors.primaryButton,
+    color: AppColors.btn,
   );
-
-
-
-
 }

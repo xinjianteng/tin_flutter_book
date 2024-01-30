@@ -9,4 +9,6 @@ class AppRoutes {
   static const Application = '/application';
   static const main = '/main';
 
+  static const bookDetail = '/book/detail';
+
 }

@@ -3,103 +3,75 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../values/values.dart';
 
-/// 扁平圆角按钮
-Widget btnFlatButtonWidget({
-  required VoidCallback onPressed,
-  double width = 140,
-  double height = 44,
-  Color gbColor = AppColors.primaryBackground,
-  String title = "button",
-  Color fontColor = AppColors.primaryText,
-  double fontSize = 18,
-  String fontName = "Montserrat",
-  FontWeight fontWeight = FontWeight.w400,
+enum Specs {
+  min,
+  normal,
+  max,
+}
+
+Widget buildBtn({
+  required String title,
+  Specs specs = Specs.normal,
+  GestureTapCallback? onTap,
 }) {
-  return Container(
-    width: width.w,
-    height: height.h,
-    child: TextButton(
-      style: ButtonStyle(
-        textStyle: MaterialStateProperty.all(TextStyle(
-          fontSize: 16.sp,
-        )),
-        foregroundColor: MaterialStateProperty.resolveWith(
-          (states) {
-            if (states.contains(MaterialState.focused) &&
-                !states.contains(MaterialState.pressed)) {
-              return Colors.blue;
-            } else if (states.contains(MaterialState.pressed)) {
-              return Colors.deepPurple;
-            }
-            return fontColor;
-          },
-        ),
-        backgroundColor: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.pressed)) {
-            return Colors.blue[200];
-          }
-          return gbColor;
-        }),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-          borderRadius: Borders.k6pxRadius,
-        )),
+  return InkWell(
+    onTap: onTap,
+    child: Container(
+      width: _btnWidth(specs),
+      height: _btnHeight(specs),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        borderRadius: _btnBorderRadius(specs),
+        color: AppColors.btn,
       ),
       child: Text(
         title,
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: fontColor,
-          fontFamily: fontName,
-          fontWeight: fontWeight,
-          fontSize: fontSize.sp,
-          height: 1,
+          color: AppColors.btnFont,
+          fontSize: _fontSize(specs),
+          fontFamily: "Montserrat",
         ),
       ),
-      onPressed: onPressed,
     ),
   );
 }
 
-/// 第三方按钮
-Widget btnFlatButtonBorderOnlyWidget({
-  required VoidCallback onPressed,
-  double width = 88,
-  double height = 44,
-  required String iconFileName,
-}) {
-  return Container(
-    width: width.w,
-    height: height.h,
-    child: TextButton(
-      style: ButtonStyle(
-        // textStyle: MaterialStateProperty.all(TextStyle(
-        //   fontSize: 16.sp,
-        // )),
-        // foregroundColor: MaterialStateProperty.resolveWith(
-        //   (states) {
-        //     if (states.contains(MaterialState.focused) &&
-        //         !states.contains(MaterialState.pressed)) {
-        //       return Colors.blue;
-        //     } else if (states.contains(MaterialState.pressed)) {
-        //       return Colors.deepPurple;
-        //     }
-        //     return AppColors.primaryElementText;
-        //   },
-        // ),
-        // backgroundColor: MaterialStateProperty.resolveWith((states) {
-        //   if (states.contains(MaterialState.pressed)) {
-        //     return Colors.blue[200];
-        //   }
-        //   return AppColors.primaryElement;
-        // }),
-        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-          borderRadius: Borders.k6pxRadius,
-        )),
-      ),
-      child: Image.asset(
-        "assets/images/icons-$iconFileName.png",
-      ),
-      onPressed: onPressed,
-    ),
-  );
+//按钮宽度
+double _btnWidth(
+  Specs specs,
+) {
+  return specs == Specs.min
+      ? Dimens.btnWidthMin
+      : (specs == Specs.normal ? Dimens.btnWidthNor : Dimens.btnWidthMax);
 }
+
+//按钮高度
+double _btnHeight(
+  Specs specs,
+) {
+  return specs == Specs.min
+      ? Dimens.btnHeightMin
+      : (specs == Specs.normal ? Dimens.btnHeightNor : Dimens.btnHeightMax);
+}
+
+//按钮文字尺寸
+double _fontSize(
+  Specs specs,
+) {
+  return specs == Specs.min
+      ? Dimens.btnFontMin
+      : (specs == Specs.normal ? Dimens.btnFontNor : Dimens.btnFontMax);
+}
+
+//按钮文字尺寸borderRadius
+BorderRadius _btnBorderRadius(
+  Specs specs,
+) {
+  return specs == Specs.min
+      ? BorderRadius.all(Radius.circular(Dimens.btnRadiusMin))
+      : (specs == Specs.normal
+          ? BorderRadius.all(Radius.circular(Dimens.btnRadiusNor))
+          : BorderRadius.all(Radius.circular(Dimens.btnRadiusMax)));
+}
+
