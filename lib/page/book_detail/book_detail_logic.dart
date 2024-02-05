@@ -1,12 +1,7 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:tin_flutter_book/common/entity/books.dart';
-import 'package:tin_flutter_book/common/utils/logger_util.dart';
 import 'package:tin_flutter_book/common/widgets/toast.dart';
 
 import '../../common/api/apis.dart';
@@ -37,37 +32,29 @@ class BookDetailLogic extends GetxController {
     }
   }
 
-  addShelf(){
-
-
-  }
-
-
   Future<void>  getDownloadBookInfo() async{
     var response =await CsgAPI.downloadBook(
         bookId: state.bookId.value
     );
 
     if(response.code==0){
-      final dbHelper = DatabaseHelper();
-      final insertedId = await dbHelper.insertBookData(response.data);
+      DownloadBook book=response.data;
+      book.bookCover=state.bookCover.value;
+      final insertedId = await DatabaseHelper().insertBookData(book);
       print('Inserted record with ID: $insertedId');
     }else{
       toastInfo(msg: "${response.msg}");
     }
 
-    // final downloadDir = await AppUtils().getDownloadPath();
+    final downloadDir = await AppUtils().getDownloadPath();
     //
-    // var responseDownload=  HttpUtil().downloadFile(response.data!.downloadUrl, downloadDir,  onReceiveProgress: (int count, int total) {
-    //   //进度
-    //   logPrint("$count $total");
-    // });
+    var responseDownload=  HttpUtil().downloadFile(response.data!.downloadUrl, downloadDir,  onReceiveProgress: (int count, int total) {
+      //进度
+      logPrint("$count $total");
+    });
     // 调用带有回调的方法
 
   }
-
-
-
 
 
 
@@ -86,7 +73,6 @@ class BookDetailLogic extends GetxController {
       return true;
     }
   }
-
 
 
 }

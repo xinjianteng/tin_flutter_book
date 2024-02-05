@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 
-
-import '../api/apis.dart';
 import '../entity/entities.dart';
 import '../utils/utils.dart';
 import '../values/values.dart';

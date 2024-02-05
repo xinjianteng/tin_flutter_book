@@ -8,4 +8,5 @@ class AStrings {
   static const String download = "下载";
 
   static const String cloudBook = "云书盘";
+  static const String shelf = "本地书架";
 }

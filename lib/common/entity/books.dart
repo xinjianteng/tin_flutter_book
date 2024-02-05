@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 
 /// 组件分页 response
@@ -96,12 +98,15 @@ class DownloadBook {
   String? filePath;
   String? downloadUrl;
   String? rawDownloadUrl;
-  int? isUpload;
+  String? isUpload;
   String? bookAuthor;
-  int? fileFormat;
+  String? fileFormat;
+  String localFiles="";
+  double downloadProgress=0;
+
 
   DownloadBook(
-      {Key? key,
+      {
       this.bookId,
       this.bookName,
       this.bookCover,
@@ -111,7 +116,9 @@ class DownloadBook {
       this.rawDownloadUrl,
       this.isUpload,
       this.bookAuthor,
-      this.fileFormat});
+      this.fileFormat,
+      required localFiles,
+     });
 
   Map<String, dynamic> toJson() => {
         "bookId": bookId,
@@ -124,6 +131,7 @@ class DownloadBook {
         "isUpload": isUpload,
         "bookAuthor": bookAuthor,
         "fileFormat": fileFormat,
+        "localFiles": localFiles,
       };
 
   factory DownloadBook.fromJson(Map<String, dynamic> json) => DownloadBook(
@@ -137,5 +145,19 @@ class DownloadBook {
         isUpload: json["isUpload"],
         bookAuthor: json["bookAuthor"],
         fileFormat: json["fileFormat"],
+        localFiles: json["localFiles"],
       );
+
+  Future<bool> localFilesExists() async{
+    //判断对象里面的本地文件路径是否存在
+    if(localFiles.isNotEmpty){
+      // 存在本地文件路径
+      final file=File(localFiles);
+      return await file.exists();
+    }else{
+      // 不存在本地文件路径
+      return false;
+    }
+  }
+
 }

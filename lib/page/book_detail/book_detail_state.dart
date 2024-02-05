@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:tin_flutter_book/common/store/stores.dart';
 
 import '../../common/entity/entities.dart';
-import '../../common/utils/utils.dart';
 
 class BookDetailState {
   final bookId = "".obs;

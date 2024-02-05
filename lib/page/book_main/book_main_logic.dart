@@ -1,17 +1,11 @@
-import 'package:get/get.dart';
-
-import 'book_main_state.dart';
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:tin_flutter_book/common/utils/utils.dart';
 
 import '../../common/api/apis.dart';
 import '../../common/entity/entities.dart';
 import '../../common/entity/page.dart';
+import 'book_main_state.dart';
 
 
 

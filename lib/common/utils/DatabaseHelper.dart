@@ -1,10 +1,10 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:tin_flutter_book/common/entity/books.dart';
 
 class DatabaseHelper {
-  static const _databaseName = 'csg.db';
-  static const _databaseVersion = 1;
+  static const _databaseName = 'csg2.db';
+  static const _databaseVersion = 2;
 
   // Singleton instance to ensure a single database connection.
   static Database? _database;
@@ -16,42 +16,68 @@ class DatabaseHelper {
     return _database!;
   }
 
-  static const _databaseTableShelf = 'DownloadBook';
+  static const _databaseTableShelf = 'shelf';
 
   Future<Database> _initDatabase() async {
     final dbPath = await getDatabasesPath();
-
+    // /data/user/0/com.example.tin_flutter_book/databases
     final path = join(dbPath, _databaseName);
 
-    return await openDatabase(
+    Database database=await openDatabase(
       path,
       version: _databaseVersion,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE $_databaseTableShelf (
             id INTEGER PRIMARY KEY,
-            bookId TEXT NOT NULL,
-            bookName TEXT NOT NULL,
-            bookCover TEXT NOT NULL,
-            encryptFilePath TEXT NOT NULL,
-            filePath TEXT NOT NULL,
-            downloadUrl TEXT NOT NULL,
+            bookId TEXT,
+            bookName TEXT,
+            bookCover TEXT,
+            encryptFilePath TEXT,
+            filePath TEXT,
+            downloadUrl TEXT,
             rawDownloadUrl TEXT ,
-            isUpload TEXT NOT NULL,
-            bookAuthor TEXT NOT NULL,
-            fileFormat TEXT NOT NULL,
-            value INTEGER
+            isUpload TEXT,
+            bookAuthor TEXT,
+            fileFormat TEXT
           )
         ''');
       },
+      // onUpgrade: (db, oldVersion, newVersion) {
+      //   // 在数据库升级时执行的操作
+      //   if (oldVersion < _databaseVersion) {
+      //     // 如果旧版本小于2，执行更新操作
+      //     // db.execute('ALTER TABLE timerdata RENAME TO taskdata');
+      //   }
+      // }
     );
+
+
+    return database;
   }
 
-  // 插入数据的方法
-  Future<int> insertData(Map<String, dynamic> data) async {
-    final db = await database;
-    return await db.insert('my_table', data);
+  Future<void> updateDatabase() async {
+    // 打开数据库，指定数据库版本
+    Database database = await openDatabase(
+      join(await getDatabasesPath(), 'your_database.db'),
+      version: 2, // 更新数据库版本号
+      onCreate: (db, version) {
+        // 在数据库首次创建时执行的操作
+        db.execute('CREATE TABLE taskdata(id INTEGER PRIMARY KEY, name TEXT)');
+      },
+      onUpgrade: (db, oldVersion, newVersion) {
+        // 在数据库升级时执行的操作
+        if (oldVersion < 2) {
+          // 如果旧版本小于2，执行更新操作
+          db.execute('ALTER TABLE timerdata RENAME TO taskdata');
+        }
+      },
+    );
+
+    // 关闭数据库连接
+    await database.close();
   }
+
 
   // 插入图书
   Future<int> insertBookData(DownloadBook book) async {
@@ -59,7 +85,39 @@ class DatabaseHelper {
     return await db.insert(_databaseTableShelf, book.toJson());
   }
 
+  //查询图书
+  Future<List<DownloadBook>> getShelfBookData() async {
+    final db = await database;
+    // 嵌套的await示例：先查询主表数据
+    final bookResult = await db.query(
+      _databaseTableShelf,
+    );
+    if (bookResult.isEmpty) {
+      return [];
+    }
+    final result=List<DownloadBook>.from(
+        bookResult.map((x) => DownloadBook.fromJson(x)));
+    return result;
+  }
+
+  updateShelfBookData() async{
+    final db = await database;
+    db.update(_databaseTableShelf, values,where: );
+  }
+
+
+
+//  查询图书
+
 // 更新数据的方法...
 // 查询数据的方法...
 // 删除数据的方法...
+
+
+
+
+
+
+
+
 }

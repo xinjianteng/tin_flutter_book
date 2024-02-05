@@ -1,14 +1,11 @@
-import 'dart:typed_data';
-
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tin_flutter_book/common/utils/http.dart';
 
 
 /// 缓存图片
 Widget netImageCached(
-  String path, {
+  String? path, {
   double width = 48,
   double height = 48,
   double radius = 0,
@@ -16,7 +13,7 @@ Widget netImageCached(
   BoxFit fit = BoxFit.fitHeight,
 }) {
   return CachedNetworkImage(
-    imageUrl: path,
+    imageUrl: path ?? "",
     imageBuilder: (context, imageProvider) => Container(
       height: height,
       width: width,

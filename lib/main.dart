@@ -5,12 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 import 'common/langs/translation_service.dart';
 import 'common/routers/pages.dart';
-import 'common/style/style.dart';
+import 'common/store/config_store.dart';
 import 'common/utils/utils.dart';
 import 'common/values/values.dart';
-import 'common/store/config_store.dart';
 import 'global.dart';
 
 Future<void>  main() async{

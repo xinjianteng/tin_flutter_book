@@ -4,12 +4,11 @@ import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tin_flutter_book/common/routers/names.dart';
 
-import 'book_main_logic.dart';
-
 import '../../common/entity/books.dart';
 import '../../common/style/style.dart';
 import '../../common/values/values.dart';
 import '../../common/widgets/widgets.dart';
+import 'book_main_logic.dart';
 
 class BookMainPage extends StatelessWidget {
   final logic = Get.put(BookMainLogic());
@@ -20,7 +19,7 @@ class BookMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: transparentAppBar(title: AStrings.register, actions: [
+      appBar: transparentAppBar(title: AStrings.cloudBook, actions: [
         IconButton(
           onPressed: () {
             // logic.switchViewStyle();

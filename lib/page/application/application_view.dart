@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../../common/values/values.dart';
-import '../../common/widgets/widgets.dart';
 import '../book_main/book_main_view.dart';
 import '../book_shelf/book_shelf_view.dart';
-import '../main/main_view.dart';
 import 'application_logic.dart';
 
 class ApplicationPage extends StatelessWidget {

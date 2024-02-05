@@ -40,6 +40,12 @@ class AppColors {
   static const Color line = Color(0xFFAEAEB0);
 
 
+  ///进度条背景色
+  static const Color progressBg = Color(0xFFAEAEB0);
+  ///进度条值
+  static const Color progressValue = Color(0xFFFF5543);
+
+
   /// nav 默认颜色 灰色
   static const Color navNormal =  Color(0xff959595);
 

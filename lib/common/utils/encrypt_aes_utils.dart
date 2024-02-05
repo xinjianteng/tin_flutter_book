@@ -1,6 +1,5 @@
 
 //只有一个加密这么导入就行了
-import 'package:encrypt/encrypt.dart';
 //如果同时使用了两个加密，很容易冲突，使用模块化导出即可
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:tin_flutter_book/common/utils/utils.dart';

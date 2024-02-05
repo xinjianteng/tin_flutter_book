@@ -1,8 +1,6 @@
 import 'dart:async';
 
-import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
-import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart' hide FormData;
 import 'package:tin_flutter_book/common/utils/utils.dart';
@@ -11,8 +9,6 @@ import 'package:tin_flutter_book/common/widgets/widgets.dart';
 
 import '../routers/routes.dart';
 import '../store/stores.dart';
-
-import 'package:path/path.dart' as p;
 
 /*
   * http 操作类

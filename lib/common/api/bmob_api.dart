@@ -1,6 +1,4 @@
 
-import 'package:dio/dio.dart';
-
 import '../entity/entities.dart';
 import '../utils/utils.dart';
 import '../values/values.dart';

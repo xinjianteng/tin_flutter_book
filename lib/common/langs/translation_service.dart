@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 
 import 'en_US.dart';
-import 'zh_Hans.dart';
 import 'zh_HK.dart';
+import 'zh_Hans.dart';
 
 /*
 

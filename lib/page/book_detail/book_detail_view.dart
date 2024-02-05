@@ -52,7 +52,7 @@ class BookDetailPage extends StatelessWidget {
               title: AStrings.download,
               specs: Specs.max,
               onTap: () {
-                logic.getDownloadBookInfo();
+                logic.checkPermission();
               },
             ),
           ),
