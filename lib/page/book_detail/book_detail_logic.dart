@@ -5,6 +5,7 @@ import 'package:tin_flutter_book/common/entity/books.dart';
 import 'package:tin_flutter_book/common/widgets/toast.dart';
 
 import '../../common/api/apis.dart';
+import '../../common/routers/routes.dart';
 import '../../common/utils/DatabaseHelper.dart';
 import '../../common/utils/app_utils.dart';
 import '../../common/utils/utils.dart';
@@ -34,25 +35,19 @@ class BookDetailLogic extends GetxController {
 
   Future<void>  getDownloadBookInfo() async{
     var response =await CsgAPI.downloadBook(
-        bookId: state.bookId.value
+        bookId: state.book.bookId.toString()
     );
 
     if(response.code==0){
       DownloadBook book=response.data;
-      book.bookCover=state.bookCover.value;
+      book.bookCover=state.book.bookCovers![0].toString();
       final insertedId = await DatabaseHelper().insertBookData(book);
-      print('Inserted record with ID: $insertedId');
+      toastInfo(msg: "加入书架成功");
+      Get.back();
+      logPrint('加入书架成功 ID: $insertedId');
     }else{
       toastInfo(msg: "${response.msg}");
     }
-
-    final downloadDir = await AppUtils().getDownloadPath();
-    //
-    var responseDownload=  HttpUtil().downloadFile(response.data!.downloadUrl, downloadDir,  onReceiveProgress: (int count, int total) {
-      //进度
-      logPrint("$count $total");
-    });
-    // 调用带有回调的方法
 
   }
 

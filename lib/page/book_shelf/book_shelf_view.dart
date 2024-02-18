@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -19,34 +18,37 @@ class BookShelfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: transparentAppBar(title: AStrings.shelf),
-      body: GetX<BookShelfLogic>(
-        init: logic,
-        initState: (_) {},
-        builder: (logic) {
-          return SmartRefresher(
-            controller: logic.refreshController,
-            onRefresh: logic.onRefresh,
-            enablePullDown: true,
-            enablePullUp: false,
-            physics: const BouncingScrollPhysics(),
-            child: GridView.builder(
-                itemCount: state.books.length,
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                // 允许GridView适应其子控件大小
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  //网格代理：定交叉轴数目
-                  crossAxisCount: 3, //条目个数
-                  crossAxisSpacing: 0.1,
-                  mainAxisSpacing: 0,
-                  childAspectRatio: 0.8,
-                ),
-                itemBuilder: (_, int position) =>
-                    _builtGridViewItem(state.books[position])),
-          );
-        },
+      appBar: transparentAppBar(title: AStrings.shelf, actions: [
+        IconButton(
+          onPressed: () {
+              logic.clearShelf();
+          },
+          icon: const Icon(Icons.delete_forever_outlined),
+        ),
+      ]),
+      body: SmartRefresher(
+        controller: logic.refreshController,
+        onRefresh: logic.onRefresh,
+        enablePullDown: true,
+        enablePullUp: false,
+        physics: const BouncingScrollPhysics(),
+        child: GetBuilder<BookShelfLogic>(builder: (logic) {
+          return GridView.builder(
+              itemCount: logic.state.books.length,
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              // 允许GridView适应其子控件大小
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                //网格代理：定交叉轴数目
+                crossAxisCount: 3, //条目个数
+                crossAxisSpacing: 0.1,
+                mainAxisSpacing: 0,
+                childAspectRatio: 0.8,
+              ),
+              itemBuilder: (_, int position) =>
+                  _builtGridViewItem(logic.state.books[position]));
+        }),
       ),
     );
   }
@@ -68,7 +70,7 @@ class BookShelfPage extends StatelessWidget {
             children: [
               _buildBook(book),
               Text(
-                '${book.bookName}',
+                book.bookName,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyleUnit.bookNameStyle(),
@@ -80,8 +82,7 @@ class BookShelfPage extends StatelessWidget {
     );
   }
 
-
-  Widget _buildBook(DownloadBook? book) {
+  Widget _buildBook(DownloadBook book) {
     return Container(
       width: ScreenUtil().screenWidth / 3,
       padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 0),
@@ -91,27 +92,25 @@ class BookShelfPage extends StatelessWidget {
           DecoratedBox(
             decoration: DecorationStyle.bookDecoration(),
             child: netImageCached(
-              book?.bookCover,
+              book.bookCover,
               radius: Dimens.bookCoverRadius,
               width: Dimens.bookWidth,
               height: Dimens.bookHeight,
             ),
           ),
-           Center(child: Visibility(
-            child: CircularProgressIndicator(
-              strokeCap: StrokeCap.round,
-              backgroundColor: AppColors.progressBg,
-              color: AppColors.progressValue,
-              value: book!.downloadProgress,
+          Center(
+            child: Visibility(
+              visible: book.localFiles.isEmpty,
+              child: CircularProgressIndicator(
+                strokeCap: StrokeCap.round,
+                backgroundColor: AppColors.progressBg,
+                color: AppColors.progressValue,
+                value: book.downloadProgress,
+              ),
             ),
-          ),
           ),
         ],
       ),
     );
   }
-
-
-
-
 }

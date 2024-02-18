@@ -71,6 +71,10 @@ dependencies:
 
   sqflite: ^2.3.1
 
+  archive: ^3.4.10
+
+
+  epub_view: ^3.2.0
 
 dev_dependencies:
   flutter_test:
@@ -100,14 +104,14 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/ic_launcher.png
-#    - assets/fifa/bx.png
-#    - assets/fifa/fg.png
-#    - assets/fifa/hl.png
-#    - assets/fifa/kldy.png
-#    - assets/fifa/mlg.png
-#    - assets/fifa/pty.png
-#    - assets/fifa/ygl.png
-#    - assets/fifa/logo.jpg
+  #    - assets/fifa/bx.png
+  #    - assets/fifa/fg.png
+  #    - assets/fifa/hl.png
+  #    - assets/fifa/kldy.png
+  #    - assets/fifa/mlg.png
+  #    - assets/fifa/pty.png
+  #    - assets/fifa/ygl.png
+  #    - assets/fifa/logo.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

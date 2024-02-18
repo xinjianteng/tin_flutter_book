@@ -37,9 +37,10 @@ class DatabaseHelper {
             filePath TEXT,
             downloadUrl TEXT,
             rawDownloadUrl TEXT ,
-            isUpload TEXT,
             bookAuthor TEXT,
-            fileFormat TEXT
+            isUpload int,
+            fileFormat int,
+            localFiles TEXT
           )
         ''');
       },
@@ -73,7 +74,6 @@ class DatabaseHelper {
         }
       },
     );
-
     // 关闭数据库连接
     await database.close();
   }
@@ -82,7 +82,7 @@ class DatabaseHelper {
   // 插入图书
   Future<int> insertBookData(DownloadBook book) async {
     final db = await database;
-    return await db.insert(_databaseTableShelf, book.toJson());
+    return await db.insert(_databaseTableShelf, book.toSql());
   }
 
   //查询图书
@@ -100,11 +100,18 @@ class DatabaseHelper {
     return result;
   }
 
-  updateShelfBookData() async{
+  Future<int> updateShelfBookData(DownloadBook book) async{
     final db = await database;
-    db.update(_databaseTableShelf, values,where: );
+    return await db.update(_databaseTableShelf, {'localFiles': book.localFiles},
+        where: "\"bookId\" = ${book.bookId}");
   }
 
+
+  // 清空表数据
+  Future<int> clearShelfBookData() async {
+    final db = await database;
+    return await db.delete(_databaseTableShelf); // 删除所有行，等同于清空表
+  }
 
 
 //  查询图书

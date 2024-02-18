@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tin_flutter_book/common/entity/books.dart';
+import 'package:tin_flutter_book/common/routers/names.dart';
 import 'package:tin_flutter_book/common/utils/DatabaseHelper.dart';
 
 import '../../common/utils/app_utils.dart';
@@ -27,6 +29,13 @@ class BookShelfLogic extends GetxController {
     });
   }
 
+
+  clearShelf() async{
+    final result = await DatabaseHelper().clearShelfBookData();
+    onRefresh();
+  }
+
+
   // 拉取数据
   Future<void> fetchNewsList({bool isRefresh = false}) async {
     final result = await DatabaseHelper().getShelfBookData();
@@ -36,46 +45,46 @@ class BookShelfLogic extends GetxController {
   }
 
   //打开或者下载图书
-  void openOrDownloadBook(DownloadBook book) async {
-    book
-        .localFilesExists()
-        .then((value) => {value ? openBook(book) : downloadBook(book)});
+  void openOrDownloadBook(DownloadBook book) {
+    if (book.localFiles.isEmpty) {
+      downloadBook(book);
+    } else {
+      openBook(book);
+    }
   }
 
 //  打开图书
-  void openBook(DownloadBook book) {}
+  void openBook(DownloadBook book) {
+    // Get.toNamed(AppRoutes.reader, arguments: book);
+    Get.toNamed(AppRoutes.bookReader, arguments: book);
+  }
 
 //  下载图书
   void downloadBook(DownloadBook book) async {
     final downloadDir = await AppUtils().getDownloadPath();
+    final savePath='$downloadDir/${book.filePath}';
 
-    HttpUtil()
-        .downloadFile(book.downloadUrl, downloadDir,
-            onReceiveProgress: (int count, int total) {
-      //进度
-      logPrint("$count $total");
-      if(count==total){
-
-      }
-
+    HttpUtil().downloadFile(book.downloadUrl, savePath,
+        onReceiveProgress: (int count, int total) {
       for (int i = 0; i < state.books.value.length; i++) {
-        final bookTmp = state.books.value[i];
-        if(book.bookId==bookTmp.bookId){
-          state.books.value[i].downloadProgress=count/total;
+        if (book.bookId == state.books.value[i].bookId) {
+          state.books.value[i].downloadProgress = count / total;
+          if (count == total) {
+            state.books.value[i].localFiles =
+                "$downloadDir/${state.books.value[i].filePath}";
+            DatabaseHelper().updateShelfBookData(state.books.value[i]);
+          }
+          update();
         }
       }
-      update();
     });
   }
 
-
   // 更新列表中指定位置的item的title
-  void updateItemAt(int index, String newTitle,double value) {
+  void updateItemAt(int index, String newTitle, double value) {
     if (index >= 0 && index < state.books.length) {
       final item = state.books[index];
       item.downloadProgress = value; // 直接修改对应item的title值
     }
   }
-
-
 }

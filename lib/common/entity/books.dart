@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
 /// 组件分页 response
 class BookPageListResponseEntity {
@@ -91,34 +92,33 @@ class DownloadBookResponseEntity<T> {
 }
 
 class DownloadBook {
-  String? bookId;
-  String? bookName;
-  String? bookCover;
-  String? encryptFilePath;
-  String? filePath;
-  String? downloadUrl;
-  String? rawDownloadUrl;
-  String? isUpload;
-  String? bookAuthor;
-  String? fileFormat;
-  String localFiles="";
-  double downloadProgress=0;
+  String bookId;
+  String bookName;
+  String bookCover;
+  String encryptFilePath;
+  String filePath;
+  String downloadUrl;
+  String rawDownloadUrl;
+  int isUpload;
+  String bookAuthor;
+  int fileFormat;
+  String localFiles;
+  double downloadProgress;
 
-
-  DownloadBook(
-      {
-      this.bookId,
-      this.bookName,
-      this.bookCover,
-      this.encryptFilePath,
-      this.filePath,
-      this.downloadUrl,
-      this.rawDownloadUrl,
-      this.isUpload,
-      this.bookAuthor,
-      this.fileFormat,
-      required localFiles,
-     });
+  DownloadBook({
+    this.bookId = "",
+    this.bookName = "",
+    this.bookCover = "",
+    this.encryptFilePath = "",
+    this.filePath = "",
+    this.downloadUrl = "",
+    this.rawDownloadUrl = "",
+    this.isUpload = 0,
+    this.bookAuthor = "",
+    this.fileFormat = 0,
+    this.localFiles = "",
+    this.downloadProgress = 0.0,
+  });
 
   Map<String, dynamic> toJson() => {
         "bookId": bookId,
@@ -132,32 +132,43 @@ class DownloadBook {
         "bookAuthor": bookAuthor,
         "fileFormat": fileFormat,
         "localFiles": localFiles,
+        "downloadProgress": downloadProgress,
       };
 
-  factory DownloadBook.fromJson(Map<String, dynamic> json) => DownloadBook(
-        bookId: json["bookId"],
-        bookName: json["bookName"],
-        bookCover: json["bookCover"],
-        encryptFilePath: json["encryptFilePath"],
-        filePath: json["filePath"],
-        downloadUrl: json["downloadUrl"],
-        rawDownloadUrl: json["rawDownloadUrl"],
-        isUpload: json["isUpload"],
-        bookAuthor: json["bookAuthor"],
-        fileFormat: json["fileFormat"],
-        localFiles: json["localFiles"],
-      );
 
-  Future<bool> localFilesExists() async{
-    //判断对象里面的本地文件路径是否存在
-    if(localFiles.isNotEmpty){
-      // 存在本地文件路径
-      final file=File(localFiles);
-      return await file.exists();
-    }else{
-      // 不存在本地文件路径
-      return false;
-    }
+  Map<String, dynamic> toSql() => {
+    "bookId": bookId,
+    "bookName": bookName,
+    "bookCover": bookCover,
+    "encryptFilePath": encryptFilePath,
+    "filePath": filePath,
+    "downloadUrl": downloadUrl,
+    "rawDownloadUrl": rawDownloadUrl,
+    "isUpload": isUpload,
+    "bookAuthor": bookAuthor,
+    "fileFormat": fileFormat,
+    "localFiles": localFiles,
+  };
+
+
+  factory DownloadBook.fromJson(Map<String, dynamic> json) {
+    return DownloadBook(
+        bookId: json["bookId"] ?? "",
+        bookName: json["bookName"] ?? "",
+        bookCover: json["bookCover"] ?? "",
+        encryptFilePath: json["encryptFilePath"] ?? "",
+        filePath: json["filePath"] ?? "",
+        downloadUrl: json["downloadUrl"] ?? "",
+        rawDownloadUrl: json["rawDownloadUrl"] ?? "",
+        isUpload: json["isUpload"],
+        bookAuthor: json["bookAuthor"] ?? "",
+        fileFormat: json["fileFormat"] ,
+        localFiles: json["localFiles"] ?? "",
+        downloadProgress: json["downloadProgress"]??0.0,
+      );
   }
+
+
+
 
 }

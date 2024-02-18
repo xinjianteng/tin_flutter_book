@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:tin_flutter_book/page/application/application_view.dart';
 import 'package:tin_flutter_book/page/book_detail/book_detail_view.dart';
+import 'package:tin_flutter_book/page/book_reader/book_reader_view.dart';
 import 'package:tin_flutter_book/page/main/main_view.dart';
+import 'package:tin_flutter_book/page/reader/reader_view.dart';
 import 'package:tin_flutter_book/page/register/register_view.dart';
 
 import '../../page/sign_in/sign_in_view.dart';
@@ -59,6 +61,22 @@ class AppPages {
     GetPage(
       name: AppRoutes.bookDetail,
       page: () => BookDetailPage(),
+      middlewares: [
+        RouteAuthMiddleware(priority: 1),
+      ],
+    ),
+
+    GetPage(
+      name: AppRoutes.reader,
+      page: () => ReaderPage(),
+      middlewares: [
+        RouteAuthMiddleware(priority: 1),
+      ],
+    ),
+
+    GetPage(
+      name: AppRoutes.bookReader,
+      page: () => BookReaderPage(),
       middlewares: [
         RouteAuthMiddleware(priority: 1),
       ],

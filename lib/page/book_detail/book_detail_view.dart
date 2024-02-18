@@ -65,7 +65,7 @@ class BookDetailPage extends StatelessWidget {
     return DecoratedBox(
       decoration: DecorationStyle.bookDecoration(),
       child: netImageCached(
-        state.bookCover.value,
+        state.book.bookCovers![0].toString(),
         radius: Dimens.bookCoverRadius,
         width: Dimens.bookWidthMAX,
         height: Dimens.bookHeightMAX,
@@ -75,7 +75,7 @@ class BookDetailPage extends StatelessWidget {
 
   Widget _buildBookName() {
     return Text(
-      '${state.bookName}',
+      '${state.book.bookName}',
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyleUnit.bookNameStyle2(),
@@ -84,7 +84,7 @@ class BookDetailPage extends StatelessWidget {
 
   Widget _buildBookAuthor() {
     return Text(
-      '${state.bookAuthor}',
+      '${state.book.bookAuthor}',
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: TextStyleUnit.bookAuthorStyle(),

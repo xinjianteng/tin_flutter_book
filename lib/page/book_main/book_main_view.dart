@@ -63,8 +63,7 @@ class BookMainPage extends StatelessWidget {
   Widget _builtGridViewItem(UploadBook book) {
     return GestureDetector(
       onTap: () {
-        Get.toNamed(
-            "${AppRoutes.bookDetail}?bookId=${book.bookId}&bookName=${book.bookName}&bookCover=${book.bookCovers![0].toString()}");
+        Get.toNamed(AppRoutes.bookDetail, arguments: book);
       },
       child: Container(
         color: AppColors.line,

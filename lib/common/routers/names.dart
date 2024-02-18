@@ -10,5 +10,8 @@ class AppRoutes {
   static const main = '/main';
 
   static const bookDetail = '/book/detail';
+  static const reader = '/reader';
+  static const bookReader = '/book/reader';
+
 
 }
