@@ -55,8 +55,8 @@ class BookShelfLogic extends GetxController {
 
 //  打开图书
   void openBook(DownloadBook book) {
-    // Get.toNamed(AppRoutes.reader, arguments: book);
-    Get.toNamed(AppRoutes.bookReader, arguments: book);
+    Get.toNamed(AppRoutes.reader, arguments: book);
+    // Get.toNamed(AppRoutes.bookReader, arguments: book);
   }
 
 //  下载图书

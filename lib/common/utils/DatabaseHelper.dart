@@ -3,8 +3,8 @@ import 'package:sqflite/sqflite.dart';
 import 'package:tin_flutter_book/common/entity/books.dart';
 
 class DatabaseHelper {
-  static const _databaseName = 'csg2.db';
-  static const _databaseVersion = 2;
+  static const _databaseName = 'csg4.db';
+  static const _databaseVersion = 4;
 
   // Singleton instance to ensure a single database connection.
   static Database? _database;
@@ -40,7 +40,8 @@ class DatabaseHelper {
             bookAuthor TEXT,
             isUpload int,
             fileFormat int,
-            localFiles TEXT
+            localFiles TEXT,
+            readProgress TEXT
           )
         ''');
       },
@@ -103,6 +104,14 @@ class DatabaseHelper {
   Future<int> updateShelfBookData(DownloadBook book) async{
     final db = await database;
     return await db.update(_databaseTableShelf, {'localFiles': book.localFiles},
+        where: "\"bookId\" = ${book.bookId}");
+  }
+
+
+//  更新阅读进度
+  Future<int> updateReadProgressData(DownloadBook book) async{
+    final db = await database;
+    return await db.update(_databaseTableShelf, {'readProgress': book.readProgress},
         where: "\"bookId\" = ${book.bookId}");
   }
 

@@ -18,7 +18,7 @@ class BookShelfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: transparentAppBar(title: AStrings.shelf, actions: [
+      appBar: commonAppBar(titleStr: AStrings.shelf, actions: [
         IconButton(
           onPressed: () {
               logic.clearShelf();

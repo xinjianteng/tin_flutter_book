@@ -18,7 +18,7 @@ class SignInPage extends StatelessWidget {
     final state = Get.find<SignInLogic>().state;
 
     return Scaffold(
-      appBar: transparentAppBar(title: AStrings.login),
+      appBar: commonAppBar(titleStr: AStrings.login),
       body: buildBody(logic),
     );
   }

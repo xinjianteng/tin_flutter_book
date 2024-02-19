@@ -4,26 +4,25 @@ import 'package:tin_flutter_book/common/style/style.dart';
 
 import '../values/values.dart';
 
-
-
-
 /// 通用 AppBar
-AppBar transparentAppBar({
-  String? title,
+AppBar commonAppBar({
+  String titleStr="",
+  Widget? titleWidget,
   Widget? leading,
   List<Widget>? actions,
 }) {
   return AppBar(
     backgroundColor: AppColors.appBg,
-    title: Text(
-      title!,
-      style: TextStyleUnit.appbar,
-    ),
+    title: titleStr.isNotEmpty
+        ? Text(
+            titleStr,
+            style: TextStyleUnit.appbar,
+          )
+        : titleWidget,
     leading: leading,
     actions: actions,
   );
 }
-
 
 /// 10像素 Divider
 Widget dividerLine({

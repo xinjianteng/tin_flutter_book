@@ -16,7 +16,7 @@ class BookDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: transparentAppBar(title: AStrings.bookInfo),
+      appBar: commonAppBar(titleStr: AStrings.bookInfo),
       body: _buildBody(),
     );
   }

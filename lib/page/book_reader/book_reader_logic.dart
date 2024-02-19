@@ -1,7 +1,10 @@
 import 'dart:convert';
-import 'dart:io';
+import 'dart:io' as io;
 
 import 'package:archive/archive.dart';
+import 'package:epub_view/epub_view.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tin_flutter_book/common/utils/logger_util.dart';
 
@@ -9,6 +12,7 @@ import 'book_reader_state.dart';
 
 class BookReaderLogic extends GetxController {
   final BookReaderState state = BookReaderState();
+
 
 
   @override
@@ -19,20 +23,38 @@ class BookReaderLogic extends GetxController {
 
 
 
+
 // 解析EPUB文件中的HTML内容
+//  参考epub文章：https://www.jianshu.com/p/23f027ef32f6?utm_campaign=maleskine
   Future<String> extractHtmlFromEpub(String epubFilePath) async {
 
 //  首先，你需要将 EPUB 文件解压并读取其中的内容。
-    final bytes = File(epubFilePath).readAsBytesSync();
+    final bytes = io.File(epubFilePath).readAsBytesSync();
+
 
 //  使用 archive 或 zip 等库来处理 ZIP 压缩包。
     final archive = ZipDecoder().decodeBytes(bytes);
+
+    // META-INF用于存放容器信息，该目录包含一个文件，即container.xml。
+    // （container.xml的主要功能用于告诉阅读器，电子书的根文件（rootfile）的路径和打开放式，一般来讲，
+    // 该container.xml文件也不需要作任何修改，除非你改变了根文件的路径和文件名称）。
+    final containerFile=archive.findFile('META-INF/container.xml');
+    final containerFileContent=utf8.decode(containerFile!.content as List<int>);
+
+    // final document=DocumentFragment.html(containerFile!.comment);
+    // final content =ZipDecoder().decodeBytes(containerFile!.content);
 
 //  解析 OPF（Open Packaging Format）文件以获取书籍结构和元数据信息。
     final opfFile = archive.findFile('OEBPS/content.opf');
 
 
-//  解析各个 HTML 内容文件和 CSS 样式表。
+    // 这里仅作示意，实际应根据OPF文件解析出HTML文件路径
+    final htmlFile = archive.findFile('OEBPS/Text/Section0001_0001.xhtml');
+    final result=utf8.decode(htmlFile!.content as List<int>);
+    logPrint(result);
+    return result;
+
+    //  解析各个 HTML 内容文件和 CSS 样式表。
 //
 //  显示内容：
 //  使用 flutter_html 或者自定义 WebView 组件来渲染 HTML 内容。
@@ -49,11 +71,6 @@ class BookReaderLogic extends GetxController {
 //  实现文本重排版功能，确保内容适应不同屏幕尺寸和方向。
 //  以下是一个简化的示例，展示如何使用 archive 和 flutter_html 库开始解析 EPUB 文件：
 
-    // 这里仅作示意，实际应根据OPF文件解析出HTML文件路径
-    final htmlFile = archive.findFile('OEBPS/chapter1.html');
-
-    final Uri _url = Uri.parse('https://flutter.cn');
-    return utf8.decode(htmlFile!.content as List<int>);
   }
 
 }

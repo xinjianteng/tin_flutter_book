@@ -24,7 +24,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: transparentAppBar(title: '书库', actions: [
+      appBar: commonAppBar(titleStr: '书库', actions: [
         IconButton(
           onPressed: () {
             // logic.switchViewStyle();

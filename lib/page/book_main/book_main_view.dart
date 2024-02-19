@@ -19,7 +19,7 @@ class BookMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: transparentAppBar(title: AStrings.cloudBook, actions: [
+      appBar: commonAppBar(titleStr: AStrings.cloudBook, actions: [
         IconButton(
           onPressed: () {
             // logic.switchViewStyle();

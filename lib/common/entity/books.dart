@@ -104,6 +104,7 @@ class DownloadBook {
   int fileFormat;
   String localFiles;
   double downloadProgress;
+  String readProgress;
 
   DownloadBook({
     this.bookId = "",
@@ -118,6 +119,7 @@ class DownloadBook {
     this.fileFormat = 0,
     this.localFiles = "",
     this.downloadProgress = 0.0,
+    this.readProgress = "",
   });
 
   Map<String, dynamic> toJson() => {
@@ -133,6 +135,7 @@ class DownloadBook {
         "fileFormat": fileFormat,
         "localFiles": localFiles,
         "downloadProgress": downloadProgress,
+        "readProgress": readProgress,
       };
 
 
@@ -148,6 +151,7 @@ class DownloadBook {
     "bookAuthor": bookAuthor,
     "fileFormat": fileFormat,
     "localFiles": localFiles,
+    "readProgress": readProgress,
   };
 
 
@@ -165,7 +169,8 @@ class DownloadBook {
         fileFormat: json["fileFormat"] ,
         localFiles: json["localFiles"] ?? "",
         downloadProgress: json["downloadProgress"]??0.0,
-      );
+      readProgress: json["readProgress"] ?? "",
+    );
   }
 
 
