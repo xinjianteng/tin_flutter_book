@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:tin_flutter_book/page/application/application_view.dart';
 import 'package:tin_flutter_book/page/book_detail/book_detail_view.dart';
 import 'package:tin_flutter_book/page/book_reader/book_reader_view.dart';
-import 'package:tin_flutter_book/page/main/main_view.dart';
 import 'package:tin_flutter_book/page/reader/reader_view.dart';
 import 'package:tin_flutter_book/page/register/register_view.dart';
 
+import '../../page/book_main/book_main_view.dart';
 import '../../page/sign_in/sign_in_view.dart';
 import '../../page/welcome/welcome_view.dart';
 import '../middlewares/middlewares.dart';
@@ -51,14 +51,6 @@ class AppPages {
     ),
 
     GetPage(
-      name: AppRoutes.main,
-      page: () => MainPage(),
-      middlewares: [
-        RouteAuthMiddleware(priority: 1),
-      ],
-    ),
-
-    GetPage(
       name: AppRoutes.bookDetail,
       page: () => BookDetailPage(),
       middlewares: [
@@ -82,6 +74,15 @@ class AppPages {
       ],
     ),
 
+
+
+    GetPage(
+      name: AppRoutes.bookMain,
+      page: () => BookMainPage(),
+      middlewares: [
+        RouteAuthMiddleware(priority: 1),
+      ],
+    ),
 
   ];
 

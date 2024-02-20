@@ -7,11 +7,11 @@ class AppRoutes {
   static const SING_IN= '/sign_in';
   static const REGISTER= '/register';
   static const Application = '/application';
-  static const main = '/main';
 
   static const bookDetail = '/book/detail';
   static const reader = '/reader';
   static const bookReader = '/book/reader';
+  static const bookMain = '/book/main';
 
 
 }

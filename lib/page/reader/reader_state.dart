@@ -9,9 +9,11 @@ class ReaderState {
 
   DownloadBook book=DownloadBook();
 
+  // 自定义类 - 可以是任何类
+  final epubBook = Rx<EpubBook>(EpubBook());
+
+
   ReaderState() {
    book= Get.arguments;
-   logPrint(book);
-
   }
 }

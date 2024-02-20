@@ -14,18 +14,14 @@ class ApplicationLogic extends GetxController {
   late final PageController pageController;
 
   // 底部导航项目
-  late final List<BottomNavigationBarItem> bottomTabs;
-
+  // 自定义类 - 可以是任何类
+  final bottomTabs = Rx<List<BottomNavigationBarItem>>([]);
 
   @override
   void onInit() {
     super.onInit();
 
-    // handleInitialUri();
-    // handleIncomingLinks();
-
-
-    bottomTabs = <BottomNavigationBarItem>[
+    bottomTabs.value = <BottomNavigationBarItem>[
       const BottomNavigationBarItem(
         icon: Icon(
           Iconfont.home,
@@ -76,6 +72,7 @@ class ApplicationLogic extends GetxController {
       ),
     ];
     pageController = PageController(initialPage: state.page);
+    update();
   }
 
 

@@ -18,14 +18,17 @@ class BookShelfPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: commonAppBar(titleStr: AStrings.shelf, actions: [
-        IconButton(
-          onPressed: () {
+      appBar: commonAppBar(
+        titleWidget: const Text(AStrings.shelf),
+        actions: [
+          IconButton(
+            onPressed: () {
               logic.clearShelf();
-          },
-          icon: const Icon(Icons.delete_forever_outlined),
-        ),
-      ]),
+            },
+            icon: const Icon(Icons.delete_forever_outlined),
+          ),
+        ],
+      ),
       body: SmartRefresher(
         controller: logic.refreshController,
         onRefresh: logic.onRefresh,

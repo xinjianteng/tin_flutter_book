@@ -18,14 +18,16 @@ class SignInPage extends StatelessWidget {
     final state = Get.find<SignInLogic>().state;
 
     return Scaffold(
-      appBar: commonAppBar(titleStr: AStrings.login),
+      appBar: commonAppBar(
+        titleWidget: const Text(AStrings.login),
+      ),
       body: buildBody(logic),
     );
   }
 
   Widget buildBody(SignInLogic logic) {
     return Container(
-      margin:  EdgeInsets.all(Dimens.margin),
+      margin: EdgeInsets.all(Dimens.margin),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -41,16 +43,15 @@ class SignInPage extends StatelessWidget {
     );
   }
 
-
   ///输入框——手机号
   Widget _buildPhone(SignInLogic logic) {
     return CupertinoTextField(
       keyboardType: TextInputType.phone,
       style: TextStyleUnit.input,
-      padding :  EdgeInsets.fromLTRB(10.w, 10.h, 10.w, 10.h),
+      padding: EdgeInsets.fromLTRB(10.w, 10.h, 10.w, 10.h),
       showCursor: true,
-      onChanged: (String value){
-        logic.state.mobileStr.value=value;
+      onChanged: (String value) {
+        logic.state.mobileStr.value = value;
       },
       placeholder: "请输入手机号",
     );
@@ -60,10 +61,10 @@ class SignInPage extends StatelessWidget {
   Widget _buildPassword(SignInLogic logic) {
     return CupertinoTextField(
       keyboardType: TextInputType.visiblePassword,
-      padding :  EdgeInsets.fromLTRB(10.w, 10.h, 10.w, 10.h),
+      padding: EdgeInsets.fromLTRB(10.w, 10.h, 10.w, 10.h),
       style: TextStyleUnit.input,
-      onChanged: (String value){
-        logic.state.mobileStr.value=value;
+      onChanged: (String value) {
+        logic.state.mobileStr.value = value;
       },
       placeholder: "请输入密码，默认密码123456",
     );
@@ -74,7 +75,7 @@ class SignInPage extends StatelessWidget {
     return TextButton(
       style: TextStyleUnit.btnStyle(),
       onPressed: logic.login,
-      child:  Text(
+      child: Text(
         '登录',
         style: TextStyleUnit.btnTextStyle(),
       ),
@@ -88,12 +89,10 @@ class SignInPage extends StatelessWidget {
       onPressed: () {
         Get.toNamed(AppRoutes.REGISTER);
       },
-      child:  Text(
+      child: Text(
         '注册',
         style: TextStyleUnit.btnTextStyle(),
       ),
     );
   }
-
-
 }

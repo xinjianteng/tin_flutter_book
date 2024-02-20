@@ -15,7 +15,7 @@ class RegisterPage extends StatelessWidget {
 
     return Scaffold(
       appBar: commonAppBar(
-        titleStr: "注册",
+        titleWidget: const Text(AStrings.register),
         leading: const BackButton(
           color: AppColors.btn,
         ),

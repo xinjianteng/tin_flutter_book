@@ -72,7 +72,7 @@ class BookShelfLogic extends GetxController {
           if (count == total) {
             state.books.value[i].localFiles =
                 "$downloadDir/${state.books.value[i].filePath}";
-            DatabaseHelper().updateShelfBookData(state.books.value[i]);
+            DatabaseHelper().updateBookLocalFilesData(state.books.value[i]);
           }
           update();
         }

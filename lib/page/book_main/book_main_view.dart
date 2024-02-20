@@ -10,23 +10,31 @@ import '../../common/values/values.dart';
 import '../../common/widgets/widgets.dart';
 import 'book_main_logic.dart';
 
-class BookMainPage extends StatelessWidget {
+class BookMainPage extends StatefulWidget {
+  const BookMainPage({super.key});
+
+  @override
+  State<BookMainPage> createState() => _BookMainPageState();
+}
+
+class _BookMainPageState extends State<BookMainPage> {
   final logic = Get.put(BookMainLogic());
   final state = Get.find<BookMainLogic>().state;
-
-  BookMainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: commonAppBar(titleStr: AStrings.cloudBook, actions: [
-        IconButton(
-          onPressed: () {
-            // logic.switchViewStyle();
-          },
-          icon: const Icon(Icons.grid_view_sharp),
-        ),
-      ]),
+      appBar: commonAppBar(
+        titleWidget: const Text(AStrings.cloudBook),
+        actions: [
+          IconButton(
+            onPressed: () {
+              // logic.switchViewStyle();
+            },
+            icon: const Icon(Icons.grid_view_sharp),
+          ),
+        ],
+      ),
       backgroundColor: AppColors.white,
       body: GetX<BookMainLogic>(
         init: logic,
@@ -42,9 +50,6 @@ class BookMainPage extends StatelessWidget {
             child: GridView.builder(
                 itemCount: state.newsList.length,
                 scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                // 允许GridView适应其子控件大小
-                physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   //网格代理：定交叉轴数目
                   crossAxisCount: 3, //条目个数

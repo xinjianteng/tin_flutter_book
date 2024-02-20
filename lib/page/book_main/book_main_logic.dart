@@ -34,8 +34,8 @@ class BookMainLogic extends GetxController {
   /// 成员变量
   String categoryCode = '';
   int curPage = 1;
-  int pageSize = 20;
-  int total = 0;
+  int pageSize = 30;
+  int total = 30;
 
 
 

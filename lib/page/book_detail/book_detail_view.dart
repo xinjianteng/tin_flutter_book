@@ -16,7 +16,9 @@ class BookDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: commonAppBar(titleStr: AStrings.bookInfo),
+      appBar: commonAppBar(
+        titleWidget: const Text(AStrings.bookInfo),
+      ),
       body: _buildBody(),
     );
   }
@@ -90,6 +92,4 @@ class BookDetailPage extends StatelessWidget {
       style: TextStyleUnit.bookAuthorStyle(),
     );
   }
-
-
 }

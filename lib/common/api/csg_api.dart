@@ -43,11 +43,6 @@ class CsgAPI {
   }
 
 
-
-
-
-
-
   /// 登录
   static Future<PageListResponseEntity> getBooks({
     PageListRequestEntity? params,
@@ -56,9 +51,8 @@ class CsgAPI {
     var nonce = AppUtils.getNonce();
     Map<String, String> formData = {};
     formData["current"] = params!.current.toString();
-    // formData["size"] = params!.size.toString();
-    formData["from"] = 'APP';
     formData["nonce"] = nonce;
+    formData['size'] = params.size.toString();
     formData["timestamp"] = timeStamp.toString();
 
     // formData["isGroup"] = '0';
@@ -72,6 +66,7 @@ class CsgAPI {
     signStr = "${signStr}secret_key=4CTZ7892m8xOba48efnN4PBgqXKEKU5J";
     formData["sign"] = EncryptUtils.encryptMd5(signStr).toUpperCase();
 
+    // formData["from"] = 'APP';
     var response = await HttpUtil().post(
       csgUploadBookInfo,
       data: formData,

@@ -38,8 +38,10 @@ class _ReaderPageState extends State<ReaderPage> {
                             '',
                         textAlign: TextAlign.start,
                       )),
-              leading: const BackButton(
-                color: AppColors.btn,
+              leading:  BackButton(
+                onPressed: (){
+                  logic.updateReadProgress();
+                },
               ),),
           endDrawer: Drawer(
             child: EpubViewTableOfContents(

@@ -104,7 +104,8 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-    - assets/ic_launcher.png
+#    - assets/ic_launcher.png
+    - assets/
   #    - assets/fifa/bx.png
   #    - assets/fifa/fg.png
   #    - assets/fifa/hl.png

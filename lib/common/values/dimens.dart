@@ -47,6 +47,8 @@ class Dimens {
   static  double btnRadiusNor = 16.r;
   static  double btnRadiusMax = 22.r;
 
+  static  double readDrawerWidth = 200.w;
+
 
   static double getStatusBarHeight() {
     return ScreenUtil().statusBarHeight;

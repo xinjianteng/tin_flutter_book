@@ -101,7 +101,7 @@ class DatabaseHelper {
     return result;
   }
 
-  Future<int> updateShelfBookData(DownloadBook book) async{
+  Future<int> updateBookLocalFilesData(DownloadBook book) async{
     final db = await database;
     return await db.update(_databaseTableShelf, {'localFiles': book.localFiles},
         where: "\"bookId\" = ${book.bookId}");
@@ -109,7 +109,7 @@ class DatabaseHelper {
 
 
 //  更新阅读进度
-  Future<int> updateReadProgressData(DownloadBook book) async{
+  Future<int> updateBookReadProgressData(DownloadBook book) async{
     final db = await database;
     return await db.update(_databaseTableShelf, {'readProgress': book.readProgress},
         where: "\"bookId\" = ${book.bookId}");

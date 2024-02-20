@@ -6,19 +6,15 @@ import '../values/values.dart';
 
 /// 通用 AppBar
 AppBar commonAppBar({
-  String titleStr="",
   Widget? titleWidget,
   Widget? leading,
   List<Widget>? actions,
 }) {
   return AppBar(
+    foregroundColor:  AppColors.btn,
     backgroundColor: AppColors.appBg,
-    title: titleStr.isNotEmpty
-        ? Text(
-            titleStr,
-            style: TextStyleUnit.appbar,
-          )
-        : titleWidget,
+    title:  titleWidget,
+    titleTextStyle: TextStyleUnit.appbar,
     leading: leading,
     actions: actions,
   );
