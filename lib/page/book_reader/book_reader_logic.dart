@@ -3,8 +3,6 @@ import 'dart:io' as io;
 
 import 'package:archive/archive.dart';
 import 'package:epub_view/epub_view.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tin_flutter_book/common/utils/logger_util.dart';
 import 'package:tin_flutter_book/common/widgets/toast.dart';

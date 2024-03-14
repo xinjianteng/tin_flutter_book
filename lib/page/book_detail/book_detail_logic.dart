@@ -5,9 +5,6 @@ import 'package:tin_flutter_book/common/entity/books.dart';
 import 'package:tin_flutter_book/common/widgets/toast.dart';
 
 import '../../common/api/apis.dart';
-import '../../common/routers/routes.dart';
-import '../../common/utils/DatabaseHelper.dart';
-import '../../common/utils/app_utils.dart';
 import '../../common/utils/utils.dart';
 import 'book_detail_state.dart';
 

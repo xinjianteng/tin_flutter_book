@@ -1,16 +1,11 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:epub_view/epub_view.dart';
 import 'package:get/get.dart';
 import 'package:tin_flutter_book/common/widgets/toast.dart';
 
-import '../../common/utils/DatabaseHelper.dart';
 import '../../common/utils/utils.dart';
 import 'reader_state.dart';
-
-import 'package:archive/archive.dart';
-import 'package:flutter/material.dart';
 
 class ReaderLogic extends GetxController {
   final ReaderState state = ReaderState();

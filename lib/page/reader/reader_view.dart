@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tin_flutter_book/common/utils/logger_util.dart';
 
-import '../../common/values/strings.dart';
-import '../../common/values/values.dart';
 import '../../common/widgets/app.dart';
 import 'reader_logic.dart';
 

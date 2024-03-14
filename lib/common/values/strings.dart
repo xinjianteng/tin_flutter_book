@@ -7,7 +7,12 @@ class AStrings {
   static const String bookInfo = "图书信息";
   static const String download = "下载";
 
-  static const String cloudBook = "云书盘";
-  static const String shelf = "本地书架";
+  static const String main = "首页";
+  static const String shelf = "本地";
   static const String reader = "阅读器";
+
+  static const String mine = "我的";
+
+  static const String search = "搜索";
+
 }

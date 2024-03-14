@@ -17,7 +17,7 @@ class AppColors {
   static const Color golden = Color(0xff8B7961);
 
   /// 按钮颜色
-  static const Color btn = Color(0xFFFF5543 );
+  static const Color btn = Color(0xFFD7311E);
   /// 按钮字体颜色
   static const Color btnFont = Color(0xFFFFFFFF );
   /// 输入框 提示字灰色

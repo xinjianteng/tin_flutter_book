@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:tin_flutter_book/common/entity/books.dart';
 import 'package:tin_flutter_book/common/routers/names.dart';
-import 'package:tin_flutter_book/common/utils/DatabaseHelper.dart';
 
 import '../../common/utils/app_utils.dart';
 import '../../common/utils/utils.dart';
@@ -55,7 +53,7 @@ class BookShelfLogic extends GetxController {
 
 //  打开图书
   void openBook(DownloadBook book) {
-    Get.toNamed(AppRoutes.reader, arguments: book);
+    // Get.toNamed(AppRoutes.reader, arguments: book);
     // Get.toNamed(AppRoutes.bookReader, arguments: book);
   }
 

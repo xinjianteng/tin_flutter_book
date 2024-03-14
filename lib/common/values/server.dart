@@ -18,6 +18,11 @@ const String csgHost="http://api.zglibrary.com";
 const String csgApiLogin="/auth/oauth/token";
 ///上传书列表
 const String csgUploadBookInfo="/book/uploadBookInfo/books";
+
+///上传书  分组列表
+const String csgUploadBookGroupList="/book/uploadBookGroup/list";
+
+
 const String csgDownloadBook="/book/uploadBookFile/download";
 const String csgTest="/adv/info/all";
 const String uploadBookGroup="/book/uploadBookGroup/books";

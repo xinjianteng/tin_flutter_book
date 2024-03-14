@@ -1,6 +1,5 @@
 import 'package:epub_view/epub_view.dart';
 import 'package:get/get.dart';
-import 'package:tin_flutter_book/common/utils/logger_util.dart';
 
 import '../../common/entity/entities.dart';
 

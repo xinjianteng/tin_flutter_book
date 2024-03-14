@@ -53,12 +53,52 @@ class PageListResponseEntity<T> {
       };
 }
 
+
+// class Datas {
+//   int total = 0;
+//   int current = 0;
+//   int pages = 0;
+//   int size = 0;
+//   List<UploadBook> records = [];
+//
+//   Datas({
+//     required this.total,
+//     required this.current,
+//     required this.pages,
+//     required this.size,
+//     required this.records,
+//   });
+//
+//   factory Datas.fromJson(Map<String, dynamic> json) => Datas(
+//     total: json["total"],
+//     current: json["current"],
+//     pages: json["pages"],
+//     size: json["size"],
+//     records: json["records"] == null
+//         ? []
+//         : List<UploadBook>.from(
+//         json["records"].map((x) => UploadBook.fromJson(x))),
+//   );
+//
+//
+//   Map<String, dynamic> toJson() => {
+//     "total": total,
+//     "current": current,
+//     "pages": pages,
+//     "size": size,
+//     "records": records == null
+//         ? []
+//         : List<dynamic>.from(records!.map((x) => x.toJson())),
+//   };
+// }
+
+
 class Datas {
   int total = 0;
   int current = 0;
   int pages = 0;
   int size = 0;
-  List<UploadBook> records = [];
+  List records = [];
 
   Datas({
     required this.total,

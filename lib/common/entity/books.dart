@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 
 /// 组件分页 response
 class BookPageListResponseEntity {
@@ -34,6 +31,8 @@ class UploadBook {
   String? bookName;
   String? bookAuthor;
   List? bookCovers;
+
+
 
   UploadBook({
     Key? key,

@@ -8,8 +8,6 @@ import '../values/values.dart';
 class CsgAPI {
 
 
-
-
   /// 登录
   static Future<UserCsgLoginResponseEntity> login({
     UserCsgLoginRequestEntity? params,
@@ -17,7 +15,6 @@ class CsgAPI {
     var timeStamp = AppUtils.getTime();
     var nonce = AppUtils.getNonce();
     Map<String, String> formData = {};
-    formData["deviceId"] = "2e33f78a-e0fb-4cd2-8193-f2efb7e8b3b0";
     formData["from"] = "App";
     formData["grant_type"] = "password";
     formData["loginType"] = "1";
@@ -29,10 +26,11 @@ class CsgAPI {
     var signStr = "";
     for (var key in formData.keys) {
       var value = formData[key];
-      signStr = "${"$signStr$key=" + value!}&";
+      signStr = "${"$signStr$key=${value!}"}&";
     }
     signStr = "${signStr}secret_key=4CTZ7892m8xOba48efnN4PBgqXKEKU5J";
     formData["sign"] = EncryptUtils.encryptMd5(signStr).toUpperCase();
+
     var response = await HttpUtil().post(
       csgApiLogin,
       data: formData,
@@ -43,7 +41,7 @@ class CsgAPI {
   }
 
 
-  /// 登录
+  /// 图书列表  （含分组）
   static Future<PageListResponseEntity> getBooks({
     PageListRequestEntity? params,
   }) async {
@@ -55,7 +53,7 @@ class CsgAPI {
     formData['size'] = params.size.toString();
     formData["timestamp"] = timeStamp.toString();
 
-    // formData["isGroup"] = '0';
+    // formData["group"] = '1';
     // formData["sort"] = '2';
 
     var signStr = "";
@@ -69,6 +67,35 @@ class CsgAPI {
     // formData["from"] = 'APP';
     var response = await HttpUtil().post(
       csgUploadBookInfo,
+      data: formData,
+      queryParameters: formData,
+      baseUrl: csgHost,
+    );
+
+    return PageListResponseEntity.fromJson(
+        response as Map<String, dynamic>);
+
+  }
+
+
+
+  /// 分组列表
+  static Future<PageListResponseEntity> getGroupList() async {
+    var timeStamp = AppUtils.getTime();
+    var nonce = AppUtils.getNonce();
+    Map<String, String> formData = {};
+    formData["nonce"] = nonce;
+    formData["timestamp"] = timeStamp.toString();
+    var signStr = "";
+    for (var key in formData.keys) {
+      var value = formData[key];
+      signStr="$signStr$key=$value&";
+    }
+    signStr = "${signStr}secret_key=4CTZ7892m8xOba48efnN4PBgqXKEKU5J";
+    formData["sign"] = EncryptUtils.encryptMd5(signStr).toUpperCase();
+
+    var response = await HttpUtil().post(
+      csgUploadBookGroupList,
       data: formData,
       queryParameters: formData,
       baseUrl: csgHost,

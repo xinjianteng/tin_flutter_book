@@ -21,16 +21,17 @@ class _BookMainPageState extends State<BookMainPage> {
   final logic = Get.put(BookMainLogic());
   final state = Get.find<BookMainLogic>().state;
 
+  // 屏幕宽度，用于优化性能
+  final double screenWidth = ScreenUtil().screenWidth;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: commonAppBar(
-        titleWidget: const Text(AStrings.cloudBook),
+        titleWidget: const Text(AStrings.main),
         actions: [
           IconButton(
-            onPressed: () {
-              // logic.switchViewStyle();
-            },
+            onPressed: () {},
             icon: const Icon(Icons.grid_view_sharp),
           ),
         ],
@@ -48,24 +49,24 @@ class _BookMainPageState extends State<BookMainPage> {
             enablePullUp: true,
             physics: const BouncingScrollPhysics(),
             child: GridView.builder(
-                itemCount: state.newsList.length,
-                scrollDirection: Axis.vertical,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  //网格代理：定交叉轴数目
-                  crossAxisCount: 3, //条目个数
-                  crossAxisSpacing: 0.1,
-                  mainAxisSpacing: 0,
-                  childAspectRatio: 0.8,
-                ),
-                itemBuilder: (_, int position) =>
-                    _builtGridViewItem(state.newsList[position])),
+              itemCount: state?.newsList?.length ?? 0, // 空检查
+              scrollDirection: Axis.vertical,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 0.1,
+                mainAxisSpacing: 0,
+                childAspectRatio: 0.8,
+              ),
+              itemBuilder: (_, int position) =>
+                  _buildGridViewItem(state?.newsList?[position] ?? UploadBook()), // 空检查
+            ),
           );
         },
       ),
     );
   }
 
-  Widget _builtGridViewItem(UploadBook book) {
+  Widget _buildGridViewItem(UploadBook book) {
     return GestureDetector(
       onTap: () {
         Get.toNamed(AppRoutes.bookDetail, arguments: book);
@@ -76,11 +77,11 @@ class _BookMainPageState extends State<BookMainPage> {
         alignment: Alignment.topCenter,
         child: Container(
           color: AppColors.white,
-          width: ScreenUtil().screenWidth / 3,
+          width: screenWidth / 3,
           padding: EdgeInsets.only(top: 10.h),
           child: Column(
             children: [
-              _buildBookCover(book.bookCovers![0].toString()),
+              _buildBookCover(book.bookCovers?.first ?? ''), // 空检查
               Text(
                 '${book.bookName}',
                 maxLines: 1,
@@ -96,7 +97,7 @@ class _BookMainPageState extends State<BookMainPage> {
 
   Widget _buildBookCover(String coverPath) {
     return Container(
-      width: ScreenUtil().screenWidth / 3,
+      width: screenWidth / 3,
       padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 0),
       child: DecoratedBox(
         decoration: DecorationStyle.bookDecoration(),

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -83,6 +84,10 @@ class HttpUtil {
       },
       onResponse: (response, handler) {
         // Do something with response data
+        logPrint(
+            "请求地址：${response.requestOptions.path}\n"
+                "请求原始结果：${jsonEncode(response.data.toString())}");
+
         return handler.next(response); // continue
         // 如果你想终止请求并触发一个错误,你可以 reject 一个`DioError`对象,如`handler.reject(error)`，
         // 这样请求将被中止并触发异常，上层catchError会被调用。
@@ -142,7 +147,7 @@ class HttpUtil {
                 return ErrorEntity(code: errCode, message: "请求语法错误");
               case 401:
                 // return ErrorEntity(code: errCode, message: "没有权限");
-                 Get.toNamed(AppRoutes.SING_IN);
+                Get.toNamed(AppRoutes.SING_IN);
                 return ErrorEntity(code: errCode, message: "登录过期，请重新登录");
               case 403:
                 return ErrorEntity(code: errCode, message: "服务器拒绝执行");
@@ -214,6 +219,8 @@ class HttpUtil {
     headers['osVersion'] = '33';
     headers['netType'] = '1';
     headers['channel'] = '99';
+
+    headers["from"] = "App";
     return headers;
   }
 
@@ -271,6 +278,12 @@ class HttpUtil {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) async {
+
+    logPrint(
+        "请求地址：$path\n"
+            "请求参数：${jsonEncode(data)}");
+
+
     Options requestOptions = options ?? Options();
 
     requestOptions.headers = requestOptions.headers ?? {};
@@ -336,10 +349,8 @@ class HttpUtil {
   /*
    * 下载文件
    */
-  downloadFile(
-    urlPath,
-    savePath, {required Null Function(int count, int total) onReceiveProgress}
-  ) async {
+  downloadFile(urlPath, savePath,
+      {required Null Function(int count, int total) onReceiveProgress}) async {
     var response;
     try {
       response = await dio.download(urlPath, savePath,

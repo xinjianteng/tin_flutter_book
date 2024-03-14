@@ -20,7 +20,6 @@ class BookMainLogic extends GetxController {
   late ScrollController scrollController;
 
 
-
   @override
   void onInit() {
     // TODO: implement onInit
