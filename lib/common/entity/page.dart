@@ -5,14 +5,17 @@ import 'entities.dart';
 /// 组件分页 request
 ///
 class PageListRequestEntity {
-  String? size;
-  String? current;
+  int size = 20;
+  int current = 1;
 
   PageListRequestEntity({
     Key? key,
-    this.size,
-    this.current,
-  });
+    required this.size,
+    required this.current,
+  }) {
+    assert(size > 0, "Size must be positive");
+    assert(current > 0, "Current must be positive");
+  }
 
   Map<String, dynamic> toJson() => {
         "size": size,
@@ -35,13 +38,13 @@ class PageListResponseEntity<T> {
     this.data,
   });
 
-  factory PageListResponseEntity.fromJson(Map<String, dynamic> json) =>
+  factory PageListResponseEntity.fromJson(Map<String, dynamic> json, {required List Function(dynamic x) onDataFormat}) =>
       PageListResponseEntity(
         msg: json["msg"],
         code: json["code"],
         sign: json["sign"],
         nonce: json["nonce"],
-        data: Datas.fromJson(json["data"]),
+        data: Datas.fromJson(json["data"], onDataFormat),
       );
 
   Map<String, dynamic> toJson() => {
@@ -54,79 +57,36 @@ class PageListResponseEntity<T> {
 }
 
 
-// class Datas {
-//   int total = 0;
-//   int current = 0;
-//   int pages = 0;
-//   int size = 0;
-//   List<UploadBook> records = [];
-//
-//   Datas({
-//     required this.total,
-//     required this.current,
-//     required this.pages,
-//     required this.size,
-//     required this.records,
-//   });
-//
-//   factory Datas.fromJson(Map<String, dynamic> json) => Datas(
-//     total: json["total"],
-//     current: json["current"],
-//     pages: json["pages"],
-//     size: json["size"],
-//     records: json["records"] == null
-//         ? []
-//         : List<UploadBook>.from(
-//         json["records"].map((x) => UploadBook.fromJson(x))),
-//   );
-//
-//
-//   Map<String, dynamic> toJson() => {
-//     "total": total,
-//     "current": current,
-//     "pages": pages,
-//     "size": size,
-//     "records": records == null
-//         ? []
-//         : List<dynamic>.from(records!.map((x) => x.toJson())),
-//   };
-// }
-
-
 class Datas {
-  int total = 0;
-  int current = 0;
-  int pages = 0;
-  int size = 0;
-  List records = [];
+  int? total ;
+  int? current = 0;
+  int? pages = 0;
+  int? size = 0;
+  List<dynamic>? records = [];
 
   Datas({
-    required this.total,
-    required this.current,
-    required this.pages,
-    required this.size,
-    required this.records,
-  });
+     this.total,
+     this.current,
+     this.pages,
+     this.size,
+     this.records,
+  }) ;
 
-  factory Datas.fromJson(Map<String, dynamic> json) => Datas(
-        total: json["total"],
-        current: json["current"],
-        pages: json["pages"],
-        size: json["size"],
-        records: json["records"] == null
-            ? []
-            : List<UploadBook>.from(
-                json["records"].map((x) => UploadBook.fromJson(x))),
-      );
-
+  factory Datas.fromJson(Map<String, dynamic> json, List Function(dynamic p1) onDataReceived) => Datas(
+    total: json["total"] as int,
+    current: json["current"]==null? 0: json["current"] as int,
+    pages: json["pages"]==null? 0: json["pages"] as int,
+    size: json["size"]==null? 0: json["size"] as int,
+    records: json["records"] == null
+        ? []
+        : onDataReceived(json["records"] as List<dynamic>),
+  );
 
   Map<String, dynamic> toJson() => {
-        "total": total,
-        "current": current,
-        "pages": pages,
-        "size": size,
-        "records": records == null
-            ? []
-            : List<dynamic>.from(records!.map((x) => x.toJson())),
-      };
+    "total": total,
+    "current": current,
+    "pages": pages,
+    "size": size,
+    "records": records!.map((x) => x.toJson()).toList(),
+  };
 }

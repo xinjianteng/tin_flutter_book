@@ -44,7 +44,7 @@ class BookShelfPage extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 //网格代理：定交叉轴数目
-                crossAxisCount: 2, //条目个数
+                crossAxisCount: 3, //条目个数
                 crossAxisSpacing: 0.1,
                 mainAxisSpacing: 0,
                 childAspectRatio: 0.8,

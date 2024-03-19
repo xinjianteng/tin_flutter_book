@@ -1,38 +1,10 @@
 import 'package:flutter/cupertino.dart';
 
-/// 组件分页 response
-class BookPageListResponseEntity {
-  int count;
-  List<UploadBook>? results;
-
-  BookPageListResponseEntity({
-    required this.results,
-    required this.count,
-  });
-
-  factory BookPageListResponseEntity.fromJson(Map<String, dynamic> json) =>
-      BookPageListResponseEntity(
-        count: json["count"],
-        results: json["results"] == null
-            ? []
-            : List<UploadBook>.from(
-                json["results"].map((x) => UploadBook.fromJson(x))),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "results": results == null
-            ? []
-            : List<dynamic>.from(results!.map((x) => x.toJson())),
-      };
-}
-
 class UploadBook {
   String? bookId;
   String? bookName;
   String? bookAuthor;
   List? bookCovers;
-
-
 
   UploadBook({
     Key? key,

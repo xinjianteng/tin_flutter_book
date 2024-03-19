@@ -36,6 +36,9 @@ class AppColors {
   static const Color bookName = Color(0xFF333333);
   ///常规图书列表  图书作者字体颜色
   static const Color bookAuthor = Color(0xFF999999);
+
+  ///分组列表  分组名称字体颜色
+  static const Color groupName = Color(0xFF09172F);
   ///线性
   static const Color line = Color(0xFFAEAEB0);
 

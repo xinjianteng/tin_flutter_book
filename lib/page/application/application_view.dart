@@ -31,7 +31,7 @@ class _ApplicationPageState extends State<ApplicationPage> {
         () => IndexedStack(
           index: state.page,
           children: [
-            const BookGroupPage(),
+            BookGroupPage(),
             BookShelfPage(),
             MinePage(),
           ],

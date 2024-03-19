@@ -4,7 +4,6 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../common/api/apis.dart';
 import '../../common/entity/entities.dart';
-import '../../common/entity/page.dart';
 import 'book_main_state.dart';
 
 
@@ -37,7 +36,6 @@ class BookMainLogic extends GetxController {
   int total = 30;
 
 
-
   /// 事件
   void onRefresh() async{
     curPage = 1;
@@ -65,16 +63,16 @@ class BookMainLogic extends GetxController {
   Future<void> fetchNewsList({bool isRefresh = false}) async {
     var response =await CsgAPI.getBooks(
       params: PageListRequestEntity(
-        size: pageSize.toString(),
-        current: curPage.toString(),
+        size: pageSize,
+        current: curPage,
       ),
     );
     if (isRefresh == true) {
-      total = response.data!.total;
+      total = response.data!.total!;
       state.newsList.clear();
     }
     curPage++;
-    state.newsList.addAll(response.data!.records);
+    state.newsList.addAll(response.data!.records as Iterable<UploadBook>);
     update();
   }
 

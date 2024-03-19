@@ -6,8 +6,6 @@ import '../values/values.dart';
 
 /// 用户
 class CsgAPI {
-
-
   /// 登录
   static Future<UserCsgLoginResponseEntity> login({
     UserCsgLoginRequestEntity? params,
@@ -40,9 +38,8 @@ class CsgAPI {
         response as Map<String, dynamic>);
   }
 
-
   /// 图书列表  （含分组）
-  static Future<PageListResponseEntity> getBooks({
+  static Future<PageListResponseEntity<UploadBook>> getBooks({
     PageListRequestEntity? params,
   }) async {
     var timeStamp = AppUtils.getTime();
@@ -53,18 +50,13 @@ class CsgAPI {
     formData['size'] = params.size.toString();
     formData["timestamp"] = timeStamp.toString();
 
-    // formData["group"] = '1';
-    // formData["sort"] = '2';
-
     var signStr = "";
     for (var key in formData.keys) {
       var value = formData[key];
-      signStr="$signStr$key=$value&";
+      signStr = "$signStr$key=$value&";
     }
     signStr = "${signStr}secret_key=4CTZ7892m8xOba48efnN4PBgqXKEKU5J";
     formData["sign"] = EncryptUtils.encryptMd5(signStr).toUpperCase();
-
-    // formData["from"] = 'APP';
     var response = await HttpUtil().post(
       csgUploadBookInfo,
       data: formData,
@@ -73,11 +65,12 @@ class CsgAPI {
     );
 
     return PageListResponseEntity.fromJson(
-        response as Map<String, dynamic>);
-
+      response as Map<String, dynamic>,
+      onDataFormat: (p1) {
+        return List<UploadBook>.from(p1.map((x) => UploadBook.fromJson(x)));
+      },
+    );
   }
-
-
 
   /// 分组列表
   static Future<PageListResponseEntity> getGroupList() async {
@@ -89,7 +82,7 @@ class CsgAPI {
     var signStr = "";
     for (var key in formData.keys) {
       var value = formData[key];
-      signStr="$signStr$key=$value&";
+      signStr = "$signStr$key=$value&";
     }
     signStr = "${signStr}secret_key=4CTZ7892m8xOba48efnN4PBgqXKEKU5J";
     formData["sign"] = EncryptUtils.encryptMd5(signStr).toUpperCase();
@@ -102,11 +95,45 @@ class CsgAPI {
     );
 
     return PageListResponseEntity.fromJson(
-        response as Map<String, dynamic>);
-
+      response as Map<String, dynamic>,
+      onDataFormat: (p1) {
+        return List<Group>.from(p1.map((x) => Group.fromJson(x)));
+      },
+    );
   }
 
 
+
+  /// 分组列表
+  static Future<PageListResponseEntity> getGroupBookList(String groupId) async {
+    var timeStamp = AppUtils.getTime();
+    var nonce = AppUtils.getNonce();
+    Map<String, String> formData = {};
+    formData["nonce"] = nonce;
+    formData["timestamp"] = timeStamp.toString();
+    formData["groupId"] = groupId;
+    var signStr = "";
+    for (var key in formData.keys) {
+      var value = formData[key];
+      signStr = "$signStr$key=$value&";
+    }
+    signStr = "${signStr}secret_key=4CTZ7892m8xOba48efnN4PBgqXKEKU5J";
+    formData["sign"] = EncryptUtils.encryptMd5(signStr).toUpperCase();
+
+    var response = await HttpUtil().post(
+      csgUploadBookGroupBooks,
+      data: formData,
+      queryParameters: formData,
+      baseUrl: csgHost,
+    );
+
+    return PageListResponseEntity.fromJson(
+      response as Map<String, dynamic>,
+      onDataFormat: (p1) {
+        return List<UploadBook>.from(p1.map((x) => UploadBook.fromJson(x)));
+      },
+    );
+  }
 
 
   /// 登录
@@ -142,8 +169,4 @@ class CsgAPI {
     return DownloadBookResponseEntity.fromJson(
         response as Map<String, dynamic>);
   }
-
-
-
-
 }

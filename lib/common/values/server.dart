@@ -21,6 +21,8 @@ const String csgUploadBookInfo="/book/uploadBookInfo/books";
 
 ///上传书  分组列表
 const String csgUploadBookGroupList="/book/uploadBookGroup/list";
+///上传书  分组图书列表
+const String csgUploadBookGroupBooks="/book/uploadBookGroup/books";
 
 
 const String csgDownloadBook="/book/uploadBookFile/download";

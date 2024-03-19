@@ -5,7 +5,7 @@ import '../values/values.dart';
 
 ///文本样式
 class TextStyleUnit {
-  // 全局 appbar标题
+  /// 全局 appbar标题
   static TextStyle appbar = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 18.sp,
@@ -70,6 +70,14 @@ class TextStyleUnit {
     );
   }
 
+
+  /// 分组列表  分组名称样式
+  static TextStyle groupNameStyle() {
+    return TextStyle(
+      color: AppColors.groupName,
+      fontSize: 18.sp,
+    );
+  }
 
 
   ///——————————————————————————————————————————————///
